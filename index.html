@@ -7,6 +7,67 @@
   <title>ESPP Calculator</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <style>
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 48px;
+      height: 24px;
+      margin-right: 12px;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #cbd5e0;
+      transition: 0.3s;
+      border-radius: 24px;
+    }
+
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.3s;
+      border-radius: 50%;
+    }
+
+    input:checked + .toggle-slider {
+      background-color: #3182ce;
+    }
+
+    input:checked + .toggle-slider:before {
+      transform: translateX(24px);
+    }
+
+    .toggle-slider:hover {
+      background-color: #a0aec0;
+    }
+
+    input:checked + .toggle-slider:hover {
+      background-color: #2c5282;
+    }
+
+    .toggle-label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -546,6 +607,25 @@
             min="0" />
         </div>
 
+        <div class="input-group">
+          <div class="label-wrapper">
+            <label class="toggle-label">
+              <span class="toggle-switch">
+                <input type="checkbox" id="useActualShares" />
+                <span class="toggle-slider"></span>
+              </span>
+              I already received the shares
+            </label>
+            <span class="tooltip-icon">i
+              <span class="tooltip-text">Enable this toggle if you already received your shares and know the exact number. When enabled, you'll enter the actual shares received, and the calculator will skip the salary and contribution fields. When disabled, the calculator will estimate shares based on your salary and contribution percentage.</span>
+            </span>
+          </div>
+          <div class="label-wrapper" id="actualSharesLabel" style="display: none; margin-top: 12px;">
+            <label for="actualShares">Actual Shares Received</label>
+          </div>
+          <input type="number" id="actualShares" placeholder="Enable the toggle above to activate" step="0.0001" min="0" disabled />
+        </div>
+
         <div class="input-group" id="contributionGroup">
           <div class="label-wrapper">
             <label for="contribution">ESPP Contribution %</label>
@@ -599,7 +679,7 @@
           <input type="number" id="salary" placeholder="NIS ₪" step="1" min="0" />
         </div>
 
-        <div class="input-group">
+        <div class="input-group" id="exchangeRateGroup">
           <div class="label-wrapper">
             <label for="exchangeRate">NIS to USD Exchange Rate</label>
             <span class="tooltip-icon">i
@@ -608,16 +688,6 @@
             </span>
           </div>
           <input type="number" id="exchangeRate" placeholder="e.g., 3.60" step="0.01" min="0" />
-        </div>
-
-        <div class="input-group">
-          <div class="label-wrapper">
-            <label for="actualShares">Actual Shares Received (Optional)</label>
-            <span class="tooltip-icon">i
-              <span class="tooltip-text">If you already received your shares and know the exact number, enter it here. This will use the actual shares instead of calculating estimated shares, and will back-calculate your actual contribution amount.</span>
-            </span>
-          </div>
-          <input type="number" id="actualShares" placeholder="Leave empty for estimation" step="0.0001" min="0" />
         </div>
 
         <button onclick="calculate()">Calculate</button>
@@ -637,12 +707,12 @@
             <span class="result-value" id="purchasePrice">-</span>
           </div>
 
-          <div class="result-item">
+          <div class="result-item" id="monthlyContributionRow">
             <span class="result-label">Monthly Contribution (NIS)</span>
             <span class="result-value" id="monthlyContribution">-</span>
           </div>
 
-          <div class="result-item">
+          <div class="result-item" id="totalContributionNISRow">
             <span class="result-label">Total ESPP Contributions (6 months) - NIS</span>
             <span class="result-value" id="totalContributionNIS">-</span>
           </div>
@@ -849,6 +919,7 @@
       const exchangeRate = parseFloat(
         document.getElementById('exchangeRate').value
       );
+      const useActualSharesCheckbox = document.getElementById('useActualShares').checked;
       const actualShares = parseFloat(document.getElementById('actualShares').value);
 
       // Clear previous errors
@@ -866,10 +937,11 @@
         hasError = true;
       }
       
-      // If actualShares is provided, we don't need salary and contribution
-      const useActualShares = !isNaN(actualShares) && actualShares > 0;
+      // Use checkbox to determine if we're using actual shares
+      const useActualShares = useActualSharesCheckbox;
       
       if (!useActualShares) {
+        // Normal mode: require contribution, salary, and exchange rate
         if (isNaN(contributionPercent) || contributionPercent < 1 || contributionPercent > 20) {
           trigger.classList.add('error');
           hasError = true;
@@ -883,9 +955,9 @@
           hasError = true;
         }
       } else {
-        // When using actual shares, we still need exchange rate if salary was provided
-        if (!isNaN(monthlySalary) && monthlySalary > 0 && (isNaN(exchangeRate) || exchangeRate <= 0)) {
-          document.getElementById('exchangeRate').classList.add('error');
+        // Actual shares mode: require actual shares value
+        if (isNaN(actualShares) || actualShares <= 0) {
+          document.getElementById('actualShares').classList.add('error');
           hasError = true;
         }
       }
@@ -979,6 +1051,15 @@
         document.getElementById('todayValueRow').style.display = 'none';
         document.getElementById('todayProfitRow').style.display = 'none';
       }
+      
+      // Hide/show NIS contribution fields based on toggle
+      if (useActualShares) {
+        document.getElementById('monthlyContributionRow').style.display = 'none';
+        document.getElementById('totalContributionNISRow').style.display = 'none';
+      } else {
+        document.getElementById('monthlyContributionRow').style.display = 'flex';
+        document.getElementById('totalContributionNISRow').style.display = 'flex';
+      }
     }
 
     function toggleTaxInfo() {
@@ -1010,18 +1091,46 @@
       });
     });
 
-    // Hide/show salary and contribution fields based on actualShares input
-    document.getElementById('actualShares').addEventListener('input', function() {
-      const actualShares = parseFloat(this.value);
+    // Handle checkbox to show/hide fields and enable/disable inputs
+    document.getElementById('useActualShares').addEventListener('change', function() {
+      const isChecked = this.checked;
+      const actualSharesInput = document.getElementById('actualShares');
+      const actualSharesLabel = document.getElementById('actualSharesLabel');
       const contributionGroup = document.getElementById('contributionGroup');
       const salaryGroup = document.getElementById('salaryGroup');
+      const exchangeRateGroup = document.getElementById('exchangeRateGroup');
+      const priceTodayInput = document.getElementById('priceToday');
       
-      if (!isNaN(actualShares) && actualShares > 0) {
+      if (isChecked) {
+        // Show label and enable actual shares input
+        actualSharesLabel.style.display = 'flex';
+        actualSharesInput.disabled = false;
+        actualSharesInput.placeholder = 'Enter actual shares received';
+        
+        // Hide contribution, salary, and exchange rate fields
         contributionGroup.classList.add('hidden');
         salaryGroup.classList.add('hidden');
+        exchangeRateGroup.classList.add('hidden');
+        
+        // Keep Today's Stock Price enabled
+        priceTodayInput.disabled = false;
+        priceTodayInput.placeholder = 'USD $ - Leave empty if not applicable';
       } else {
+        // Hide label and disable actual shares input
+        actualSharesLabel.style.display = 'none';
+        actualSharesInput.disabled = true;
+        actualSharesInput.placeholder = 'Enable the toggle above to activate';
+        actualSharesInput.value = '';
+        actualSharesInput.classList.remove('error');
+        
+        // Show contribution, salary, and exchange rate fields
         contributionGroup.classList.remove('hidden');
         salaryGroup.classList.remove('hidden');
+        exchangeRateGroup.classList.remove('hidden');
+        
+        // Keep Today's Stock Price enabled
+        priceTodayInput.disabled = false;
+        priceTodayInput.placeholder = 'USD $ - Leave empty if not applicable';
       }
     });
 

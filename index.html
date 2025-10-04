@@ -584,7 +584,12 @@
             </div>
             <div class="radio-group">
               <label class="radio-option">
-                <input type="radio" name="offeringPeriod" value="oct-mar" checked />
+                <input
+                  type="radio"
+                  name="offeringPeriod"
+                  value="oct-mar"
+                  checked
+                />
                 <span class="radio-label">October → March</span>
               </label>
               <label class="radio-option">
@@ -928,7 +933,9 @@
     </div>
 
     <script>
-      const periodRadios = document.querySelectorAll('input[name="offeringPeriod"]');
+      const periodRadios = document.querySelectorAll(
+        'input[name="offeringPeriod"]'
+      );
       const startDateLabel = document.getElementById("startDateLabel");
       const endDateLabel = document.getElementById("endDateLabel");
 
@@ -1214,7 +1221,9 @@
         .getElementById("useActualShares")
         .addEventListener("change", function () {
           const isChecked = this.checked;
-          const actualSharesContainer = document.getElementById("actualSharesContainer");
+          const actualSharesContainer = document.getElementById(
+            "actualSharesContainer"
+          );
           const actualSharesInput = document.getElementById("actualShares");
           const contributionGroup =
             document.getElementById("contributionGroup");
@@ -1260,8 +1269,6 @@
           trigger.classList.remove("error");
         });
       });
-
-
     </script>
   </body>
 </html>

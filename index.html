@@ -661,20 +661,20 @@
               </span>
             </div>
             <div
-              class="label-wrapper"
-              id="actualSharesLabel"
+              id="actualSharesContainer"
               style="display: none; margin-top: 12px"
             >
-              <label for="actualShares">Actual Shares Received</label>
+              <div class="label-wrapper">
+                <label for="actualShares">Actual Shares Received</label>
+              </div>
+              <input
+                type="number"
+                id="actualShares"
+                placeholder="Enter actual shares received"
+                step="0.0001"
+                min="0"
+              />
             </div>
-            <input
-              type="number"
-              id="actualShares"
-              placeholder="Enable the toggle above to activate"
-              step="0.0001"
-              min="0"
-              disabled
-            />
           </div>
 
           <div class="input-group" id="contributionGroup">
@@ -1226,9 +1226,8 @@
         .getElementById("useActualShares")
         .addEventListener("change", function () {
           const isChecked = this.checked;
+          const actualSharesContainer = document.getElementById("actualSharesContainer");
           const actualSharesInput = document.getElementById("actualShares");
-          const actualSharesLabel =
-            document.getElementById("actualSharesLabel");
           const contributionGroup =
             document.getElementById("contributionGroup");
           const salaryGroup = document.getElementById("salaryGroup");
@@ -1237,10 +1236,8 @@
           const priceTodayInput = document.getElementById("priceToday");
 
           if (isChecked) {
-            // Show label and enable actual shares input
-            actualSharesLabel.style.display = "flex";
-            actualSharesInput.disabled = false;
-            actualSharesInput.placeholder = "Enter actual shares received";
+            // Show the entire actual shares container
+            actualSharesContainer.style.display = "block";
 
             // Hide contribution, salary, and exchange rate fields
             contributionGroup.classList.add("hidden");
@@ -1252,11 +1249,8 @@
             priceTodayInput.placeholder =
               "USD $ - Leave empty if not applicable";
           } else {
-            // Hide label and disable actual shares input
-            actualSharesLabel.style.display = "none";
-            actualSharesInput.disabled = true;
-            actualSharesInput.placeholder =
-              "Enable the toggle above to activate";
+            // Hide the entire actual shares container
+            actualSharesContainer.style.display = "none";
             actualSharesInput.value = "";
             actualSharesInput.classList.remove("error");
 

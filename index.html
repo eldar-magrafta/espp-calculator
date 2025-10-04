@@ -505,6 +505,33 @@
         display: none !important;
       }
 
+      .radio-group {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .radio-option {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .radio-option input[type="radio"] {
+        width: 18px;
+        height: 18px;
+        margin-right: 10px;
+        cursor: pointer;
+        accent-color: #3182ce;
+      }
+
+      .radio-label {
+        font-size: 15px;
+        color: #2d3748;
+        cursor: pointer;
+        user-select: none;
+      }
+
       @media (max-width: 600px) {
         .price-inputs {
           grid-template-columns: 1fr;
@@ -555,21 +582,16 @@
                 >
               </span>
             </div>
-            <div class="custom-select" id="periodSelect">
-              <div class="custom-select-trigger">
-                <span id="selectedPeriod">October → March</span>
-                <div class="custom-select-arrow"></div>
-              </div>
-              <div class="custom-select-dropdown">
-                <div class="custom-select-option selected" data-value="oct-mar">
-                  October → March
-                </div>
-                <div class="custom-select-option" data-value="apr-sep">
-                  April → September
-                </div>
-              </div>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="offeringPeriod" value="oct-mar" checked />
+                <span class="radio-label">October → March</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="offeringPeriod" value="apr-sep" />
+                <span class="radio-label">April → September</span>
+              </label>
             </div>
-            <input type="hidden" id="offeringPeriod" value="oct-mar" />
           </div>
 
           <div class="price-inputs">
@@ -906,34 +928,13 @@
     </div>
 
     <script>
-      const periodSelect = document.getElementById("periodSelect");
-      const periodTrigger = periodSelect.querySelector(
-        ".custom-select-trigger"
-      );
-      const periodDropdown = periodSelect.querySelector(
-        ".custom-select-dropdown"
-      );
-      const periodOptions = periodSelect.querySelectorAll(
-        ".custom-select-option"
-      );
-      const periodInput = document.getElementById("offeringPeriod");
-      const selectedPeriodSpan = document.getElementById("selectedPeriod");
+      const periodRadios = document.querySelectorAll('input[name="offeringPeriod"]');
       const startDateLabel = document.getElementById("startDateLabel");
       const endDateLabel = document.getElementById("endDateLabel");
 
-      periodTrigger.addEventListener("click", function (e) {
-        e.stopPropagation();
-        periodTrigger.classList.toggle("active");
-        periodDropdown.classList.toggle("active");
-      });
-
-      periodOptions.forEach((option) => {
-        option.addEventListener("click", function () {
-          const value = this.getAttribute("data-value");
-          const text = this.textContent;
-
-          periodInput.value = value;
-          selectedPeriodSpan.textContent = text;
+      periodRadios.forEach((radio) => {
+        radio.addEventListener("change", function () {
+          const value = this.value;
 
           if (value === "oct-mar") {
             startDateLabel.textContent = "October 1";
@@ -950,20 +951,7 @@
               "September 30";
             document.getElementById("endDateTax").textContent = "September 30";
           }
-
-          periodOptions.forEach((opt) => opt.classList.remove("selected"));
-          this.classList.add("selected");
-
-          periodTrigger.classList.remove("active");
-          periodDropdown.classList.remove("active");
         });
-      });
-
-      document.addEventListener("click", function (e) {
-        if (!periodSelect.contains(e.target)) {
-          periodTrigger.classList.remove("active");
-          periodDropdown.classList.remove("active");
-        }
       });
 
       const customSelect = document.getElementById("customSelect");
@@ -1273,12 +1261,7 @@
         });
       });
 
-      // Remove error styling from period select when changed
-      periodOptions.forEach((option) => {
-        option.addEventListener("click", function () {
-          periodTrigger.classList.remove("error");
-        });
-      });
+
     </script>
   </body>
 </html>

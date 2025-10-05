@@ -364,11 +364,32 @@ function getInputValues() {
  * @param {Event} event - Change event
  */
 function handlePeriodChange(event) {
-  updateDateLabels(event.target.value);
+  const period = event.target.value;
+  const config = OFFERING_PERIODS[period];
+  
+  // Check if we're in Hebrew mode
+  const isHebrew = currentLang === 'he';
+  
+  if (isHebrew) {
+    // In Hebrew mode, labels don't have spans, so update the entire label text
+    const startLabel = document.querySelectorAll('label[for="priceA"]')[0];
+    const endLabel = document.querySelectorAll('label[for="priceB"]')[0];
+    
+    if (startLabel) startLabel.textContent = translations.he.startPriceLabel + config.startDate;
+    if (endLabel) endLabel.textContent = translations.he.endPriceLabel + config.endDate;
+  } else {
+    // In English mode, update the date spans
+    if (elements.startDateLabel) elements.startDateLabel.textContent = config.startDate;
+    if (elements.endDateLabel) elements.endDateLabel.textContent = config.endDate;
+  }
+  
+  // Update result section date labels if they exist
+  if (elements.endDateResult) elements.endDateResult.textContent = config.endDate;
+  if (elements.endDateProfit) elements.endDateProfit.textContent = config.endDate;
+  if (elements.endDateTax) elements.endDateTax.textContent = config.endDate;
   
   // If there are already results displayed, update those too
   const highlightDateSpans = document.querySelectorAll('.highlight span[id^="endDate"]');
-  const config = OFFERING_PERIODS[event.target.value];
   highlightDateSpans.forEach(span => {
     if (span) span.textContent = config.endDate;
   });
@@ -819,16 +840,34 @@ function changeLanguage(lang) {
     OFFERING_PERIODS['apr-sep'] = { startDate: 'April 1', endDate: 'September 30' };
   }
   
-  // Update current period dates
+  // Update current period dates in all locations
   const selectedPeriod = document.querySelector('input[name="offeringPeriod"]:checked').value;
-  updateDateLabels(selectedPeriod);
-  
-  // Also update the dates in the highlight section
-  const endDateInHighlight = elements.endDateResult ? elements.endDateResult.textContent : '';
-  const endDateInProfit = elements.endDateProfit ? elements.endDateProfit.textContent : '';
-  
-  // Update these dates based on current period
   const currentPeriodConfig = OFFERING_PERIODS[selectedPeriod];
+  
+  if (lang === 'he') {
+    // In Hebrew mode, update entire label text (no spans)
+    const startLabel = document.querySelectorAll('label[for="priceA"]')[0];
+    const endLabel = document.querySelectorAll('label[for="priceB"]')[0];
+    if (startLabel) startLabel.innerHTML = t.startPriceLabel + currentPeriodConfig.startDate;
+    if (endLabel) endLabel.innerHTML = t.endPriceLabel + currentPeriodConfig.endDate;
+  } else {
+    // In English mode, ensure span structure exists and update
+    const startLabel = document.querySelectorAll('label[for="priceA"]')[0];
+    const endLabel = document.querySelectorAll('label[for="priceB"]')[0];
+    
+    if (startLabel) {
+      startLabel.innerHTML = '<span id="startDateLabel">' + currentPeriodConfig.startDate + '</span> ' + t.startPriceLabel;
+    }
+    if (endLabel) {
+      endLabel.innerHTML = '<span id="endDateLabel">' + currentPeriodConfig.endDate + '</span> ' + t.endPriceLabel;
+    }
+    
+    // Re-initialize element references after changing HTML
+    elements.startDateLabel = document.getElementById('startDateLabel');
+    elements.endDateLabel = document.getElementById('endDateLabel');
+  }
+  
+  // Update result section dates if they exist
   if (elements.endDateResult) elements.endDateResult.textContent = currentPeriodConfig.endDate;
   if (elements.endDateProfit) elements.endDateProfit.textContent = currentPeriodConfig.endDate;
   if (elements.endDateTax) elements.endDateTax.textContent = currentPeriodConfig.endDate;
@@ -836,8 +875,8 @@ function changeLanguage(lang) {
   // Update all labels, placeholders, and tooltips
   const labelElements = [
     document.querySelector('label[for="offeringPeriod"]'),
-    document.querySelectorAll('label[for="priceA"]')[0],
-    document.querySelectorAll('label[for="priceB"]')[0],
+    null, // Skip priceA - handled separately above
+    null, // Skip priceB - handled separately above
     document.querySelector('label[for="priceToday"]'),
     document.querySelector('label[for="actualShares"]'),
     document.querySelector('label[for="contribution"]'),
@@ -845,40 +884,16 @@ function changeLanguage(lang) {
     document.querySelector('label[for="exchangeRate"]')
   ];
   
-  const labelKeys = ['selectPeriod', 'startPriceLabel', 'endPriceLabel', 'todayPriceLabel', 
+  const labelKeys = ['selectPeriod', null, null, 'todayPriceLabel', 
                 'actualSharesLabel', 'contributionLabel', 'salaryLabel', 'exchangeRateLabel'];
   
   labelElements.forEach((label, index) => {
     if (label && labelKeys[index]) {
-      // Special handling for price labels with dates in Hebrew
-      if (lang === 'he' && (labelKeys[index] === 'startPriceLabel' || labelKeys[index] === 'endPriceLabel')) {
-        const dateSpan = label.querySelector('span');
-        if (dateSpan) {
-          const dateText = translateDate(dateSpan.textContent, lang);
-          // In Hebrew, show "מחיר המניה ב-[date]"
-          label.innerHTML = t[labelKeys[index]] + dateText;
-        }
-      } else if (lang === 'en' && (labelKeys[index] === 'startPriceLabel' || labelKeys[index] === 'endPriceLabel')) {
-        // When switching back to English, restore the span structure
-        const currentText = label.textContent;
-        // Extract date from current text
-        let dateText = '';
-        if (currentText.includes('ב-')) {
-          dateText = currentText.split('ב-')[1] || '';
-          dateText = translateDate(dateText, lang);
-        }
-        // Restore proper English structure: <span>date</span> Stock Price
-        if (dateText) {
-          label.innerHTML = '<span id="' + (labelKeys[index] === 'startPriceLabel' ? 'startDateLabel' : 'endDateLabel') + '">' + dateText + '</span> ' + t[labelKeys[index]];
-        }
+      const textNode = Array.from(label.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+      if (textNode) {
+        textNode.textContent = ' ' + t[labelKeys[index]];
       } else {
-        // For labels that have child elements (like spans for dates), update only the text node
-        const textNode = Array.from(label.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
-        if (textNode) {
-          textNode.textContent = ' ' + t[labelKeys[index]];
-        } else {
-          label.childNodes[0].textContent = t[labelKeys[index]];
-        }
+        label.childNodes[0].textContent = t[labelKeys[index]];
       }
     }
   });

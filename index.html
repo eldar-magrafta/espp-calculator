@@ -10,16 +10,28 @@
 
   <body>
     <div class="calculator">
-      <h1>ESPP Calculator</h1>
+      <!-- Language Toggle -->
+      <div class="language-toggle">
+        <label class="lang-option">
+          <input type="radio" name="language" value="en" checked onchange="changeLanguage('en')" />
+          <span class="lang-label">EN</span>
+        </label>
+        <label class="lang-option">
+          <input type="radio" name="language" value="he" onchange="changeLanguage('he')" />
+          <span class="lang-label">HE</span>
+        </label>
+      </div>
+
+      <h1 data-i18n="title">ESPP Calculator</h1>
 
       <div class="calculator-content">
         <div class="inputs-section">
           <div class="input-group">
             <div class="label-wrapper">
-              <label for="offeringPeriod">Select Offering Period</label>
+              <label for="offeringPeriod" data-i18n="selectPeriod">Select Offering Period</label>
               <span class="tooltip-icon"
                 >i
-                <span class="tooltip-text"
+                <span class="tooltip-text" data-i18n="periodTooltip"
                   >Choose your ESPP offering period. Each period is 6 months
                   long.</span
                 >
@@ -33,11 +45,11 @@
                   value="oct-mar"
                   checked
                 />
-                <span class="radio-label">October → March</span>
+                <span class="radio-label" data-i18n="periodOctMar">October → March</span>
               </label>
               <label class="radio-option">
                 <input type="radio" name="offeringPeriod" value="apr-sep" />
-                <span class="radio-label">April → September</span>
+                <span class="radio-label" data-i18n="periodAprSep">April → September</span>
               </label>
             </div>
           </div>

@@ -98,7 +98,7 @@ body {
   font-family: var(--font-family);
   background: var(--color-bg-main);
   min-height: 100vh;
-  padding: var(--spacing-3xl) var(--spacing-lg);
+  padding: 60px var(--spacing-lg) var(--spacing-3xl) var(--spacing-lg);
 }
 
 /* ==================== LAYOUT ==================== */
@@ -110,6 +110,56 @@ body {
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
+  position: relative;
+}
+
+/* Language Toggle */
+.language-toggle {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  display: flex;
+  gap: var(--spacing-xs);
+  background: var(--color-bg-white);
+  padding: 4px;
+  border-radius: var(--radius-md);
+  z-index: 10;
+  box-shadow: var(--shadow-md);
+  direction: ltr;
+}
+
+.lang-option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-normal);
+  background: transparent;
+}
+
+.lang-option:hover {
+  background: var(--color-bg-hover);
+}
+
+.lang-option input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+}
+
+.lang-label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.lang-option input[type="radio"]:checked + .lang-label {
+  color: var(--color-primary);
 }
 
 .calculator-content {
@@ -132,10 +182,11 @@ body {
 /* ==================== TYPOGRAPHY ==================== */
 h1 {
   color: var(--color-text-dark);
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: var(--spacing-3xl);
   font-size: var(--font-size-2xl);
   font-weight: 700;
   letter-spacing: -0.5px;
+  text-align: center;
 }
 
 .subtitle {
@@ -318,6 +369,11 @@ input::placeholder {
   width: 48px;
   height: 24px;
   margin-right: var(--spacing-sm);
+}
+
+[dir="rtl"] .toggle-switch {
+  margin-right: 0;
+  margin-left: var(--spacing-md);
 }
 
 .toggle-switch input {

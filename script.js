@@ -787,6 +787,249 @@ function initEventListeners() {
   });
 }
 
+// ==================== TRANSLATION HELPERS ====================
+
+/**
+ * Update offering periods configuration based on language
+ * @param {string} lang - Language code
+ */
+function updateOfferingPeriodsConfig(lang) {
+  if (lang === 'he') {
+    OFFERING_PERIODS['oct-mar'] = { startDate: '1 באוקטובר', endDate: '31 במרץ' };
+    OFFERING_PERIODS['apr-sep'] = { startDate: '1 באפריל', endDate: '30 בספטמבר' };
+  } else {
+    OFFERING_PERIODS['oct-mar'] = { startDate: 'October 1', endDate: 'March 31' };
+    OFFERING_PERIODS['apr-sep'] = { startDate: 'April 1', endDate: 'September 30' };
+  }
+}
+
+/**
+ * Update price input labels (start and end date labels)
+ * @param {string} lang - Language code
+ * @param {object} t - Translations object
+ * @param {object} config - Current period configuration
+ */
+function updatePriceLabels(lang, t, config) {
+  const [startLabel, endLabel] = [
+    document.querySelectorAll('label[for="priceA"]')[0],
+    document.querySelectorAll('label[for="priceB"]')[0]
+  ];
+  
+  if (lang === 'he') {
+    if (startLabel) startLabel.innerHTML = t.startPriceLabel + config.startDate;
+    if (endLabel) endLabel.innerHTML = t.endPriceLabel + config.endDate;
+  } else {
+    if (startLabel) {
+      startLabel.innerHTML = `<span id="startDateLabel">${config.startDate}</span> ${t.startPriceLabel}`;
+    }
+    if (endLabel) {
+      endLabel.innerHTML = `<span id="endDateLabel">${config.endDate}</span> ${t.endPriceLabel}`;
+    }
+    elements.startDateLabel = document.getElementById('startDateLabel');
+    elements.endDateLabel = document.getElementById('endDateLabel');
+  }
+}
+
+/**
+ * Update result section date labels
+ * @param {object} config - Current period configuration
+ */
+function updateResultDates(config) {
+  if (elements.endDateResult) elements.endDateResult.textContent = config.endDate;
+  if (elements.endDateProfit) elements.endDateProfit.textContent = config.endDate;
+  if (elements.endDateTax) elements.endDateTax.textContent = config.endDate;
+}
+
+/**
+ * Update basic form labels
+ * @param {object} t - Translations object
+ */
+function updateBasicLabels(t) {
+  const labelMap = [
+    { selector: 'label[for="offeringPeriod"]', key: 'selectPeriod' },
+    { selector: 'label[for="priceToday"]', key: 'todayPriceLabel' },
+    { selector: 'label[for="actualShares"]', key: 'actualSharesLabel' },
+    { selector: 'label[for="contribution"]', key: 'contributionLabel' },
+    { selector: 'label[for="salary"]', key: 'salaryLabel' },
+    { selector: 'label[for="exchangeRate"]', key: 'exchangeRateLabel' }
+  ];
+  
+  labelMap.forEach(({ selector, key }) => {
+    const label = document.querySelector(selector);
+    if (label) {
+      const textNode = Array.from(label.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+      if (textNode) {
+        textNode.textContent = ' ' + t[key];
+      } else {
+        label.childNodes[0].textContent = t[key];
+      }
+    }
+  });
+}
+
+/**
+ * Update all tooltips
+ * @param {object} t - Translations object
+ */
+function updateTooltips(t) {
+  const tooltipKeys = [
+    'periodTooltip', 'startPriceTooltip', 'endPriceTooltip', 'todayPriceTooltip',
+    'actualSharesTooltip', 'contributionTooltip', 'salaryTooltip', 'exchangeRateTooltip'
+  ];
+  
+  document.querySelectorAll('.tooltip-text').forEach((tooltip, index) => {
+    if (tooltipKeys[index]) tooltip.textContent = t[tooltipKeys[index]];
+  });
+}
+
+/**
+ * Update radio button labels
+ * @param {object} t - Translations object
+ */
+function updateRadioLabels(t) {
+  document.querySelectorAll('.radio-label').forEach((label, index) => {
+    label.textContent = index === 0 ? t.periodOctMar : t.periodAprSep;
+  });
+}
+
+/**
+ * Update toggle label text
+ * @param {object} t - Translations object
+ */
+function updateToggleLabel(t) {
+  const toggleLabel = document.querySelector('.toggle-label');
+  if (toggleLabel) {
+    const textNodes = Array.from(toggleLabel.childNodes).filter(node => node.nodeType === Node.TEXT_NODE);
+    if (textNodes.length > 0) {
+      textNodes[textNodes.length - 1].textContent = ' ' + t.actualSharesToggle;
+    }
+  }
+}
+
+/**
+ * Update results section labels
+ * @param {object} t - Translations object
+ */
+function updateResultsLabels(t) {
+  document.querySelector('.results-header').textContent = t.resultsHeader;
+  
+  const resultLabels = document.querySelectorAll('.result-item .result-label');
+  resultLabels.forEach(label => {
+    const text = label.textContent;
+    if (text.includes('Lower Stock Price') || text.includes('מחיר המניה הנמוך')) {
+      label.textContent = t.lowerStockPrice;
+    } else if (text.includes('Purchase Price - 15%') || text.includes('מחיר רכישה - 15%')) {
+      label.textContent = t.purchasePriceDiscount;
+    } else if (text.includes('Total ESPP Contributions (6 months) - USD') || text.includes('סה"כ הפרשות ESPP (6 חודשים) - דולר')) {
+      label.textContent = t.totalContributionUSD;
+    }
+  });
+  
+  document.querySelector('#monthlyContributionRow .result-label').textContent = t.monthlyContribution;
+  document.querySelector('#totalContributionNISRow .result-label').textContent = t.totalContributionNIS;
+  
+  const sharesLabel = Array.from(document.querySelectorAll('.result-label')).find(el => 
+    el.textContent.includes('Number of Shares') || el.textContent.includes('מספר המניות')
+  );
+  if (sharesLabel) sharesLabel.textContent = t.sharesLabel;
+}
+
+/**
+ * Update chart labels
+ * @param {object} t - Translations object
+ */
+function updateChartLabels(t) {
+  const chartTitle = document.querySelector('.chart-title');
+  if (chartTitle) chartTitle.textContent = t.chartTitle;
+  
+  const chartTitles = document.querySelectorAll('.chart-card-title');
+  if (chartTitles[0]) chartTitles[0].textContent = t.priceComparisonTitle;
+  if (chartTitles[1]) chartTitles[1].textContent = t.profitBreakdownTitle;
+  
+  const priceBarLabels = document.querySelectorAll('.price-bar-label');
+  if (priceBarLabels[0]) priceBarLabels[0].textContent = t.startPriceBar;
+  if (priceBarLabels[1]) priceBarLabels[1].textContent = t.endPriceBar;
+  if (priceBarLabels[2]) priceBarLabels[2].textContent = t.purchasePriceBar;
+  
+  const summaryLabel = document.querySelector('.summary-label');
+  if (summaryLabel) summaryLabel.textContent = t.totalContributionUSD;
+  
+  const segmentLabels = document.querySelectorAll('.segment-label');
+  if (segmentLabels[0]) segmentLabels[0].textContent = t.contributionSegment;
+  if (segmentLabels[1]) segmentLabels[1].textContent = t.profitSegment;
+}
+
+/**
+ * Update highlight section labels
+ * @param {string} lang - Language code
+ * @param {object} t - Translations object
+ */
+function updateHighlightLabels(lang, t) {
+  const highlightItems = document.querySelectorAll('.highlight .result-item');
+  
+  highlightItems.forEach((item) => {
+    const label = item.querySelector('.result-label');
+    if (!label) return;
+    
+    const labelText = label.textContent;
+    const separator = lang === 'he' ? '' : ' ';
+    
+    if (labelText.includes('Value at') || labelText.includes('ערכן ב')) {
+      const dateSpan = label.querySelector('span');
+      if (dateSpan) {
+        const dateText = translateDate(dateSpan.textContent, lang);
+        label.innerHTML = `${t.valueAtDate}${separator}<span id="endDateResult">${dateText}</span>`;
+      }
+    } else if ((labelText.includes('Value Today') || labelText.includes('ערכן היום')) && !labelText.includes('Profit')) {
+      label.textContent = t.valueTodayLabel;
+    } else if (labelText.includes('Instant Profit') || labelText.includes('הרווח המיידי')) {
+      const dateSpan = label.querySelector('span');
+      if (dateSpan) {
+        const dateText = translateDate(dateSpan.textContent, lang);
+        label.innerHTML = `${t.profitAtDate}${separator}<span id="endDateProfit">${dateText}</span> ${t.profitValueMinus}`;
+      }
+    } else if (labelText.includes('Total Profit Today') || labelText.includes('הרווח הכולל')) {
+      label.textContent = t.profitTodayLabel;
+    }
+  });
+}
+
+/**
+ * Update collapsible sections
+ * @param {string} lang - Language code
+ * @param {object} t - Translations object
+ */
+function updateCollapsibleSections(lang, t) {
+  const feesTitleElem = document.querySelector('[onclick="toggleFeesInfo()"] strong');
+  if (feesTitleElem) feesTitleElem.textContent = t.feesTitle;
+  
+  const taxTitleElem = document.querySelector('[onclick="toggleTaxInfo()"] strong');
+  if (taxTitleElem) taxTitleElem.textContent = t.taxTitle;
+  
+  const feesContent = document.querySelector('#feesContent .collapsible-content-inner');
+  if (feesContent) {
+    feesContent.innerHTML = `
+      <strong style="color: #2c5282">${t.feesPurchase}</strong>
+      ${t.feesPurchaseText}<br/><br/>
+      <strong style="color: #2c5282">${t.feesSelling}</strong>
+      ${t.feesSellingText}
+    `;
+  }
+  
+  const taxContent = document.querySelector('#taxContent .collapsible-content-inner');
+  if (taxContent) {
+    const endDate = elements.endDateTax ? elements.endDateTax.textContent : (lang === 'he' ? '31 במרץ' : 'March 31');
+    taxContent.innerHTML = `
+      <strong>${t.taxImportant}</strong>
+      ${t.taxImportantText}
+      <strong>${t.taxWhenBuy} (<span>${endDate}</span>):</strong>
+      ${t.taxWhenBuyText}
+      <strong>${t.taxWhenSell}</strong>
+      ${t.taxWhenSellText}
+    `;
+  }
+}
+
 // ==================== INITIALIZATION ====================
 
 /**
@@ -819,216 +1062,39 @@ function translateDate(dateText, lang) {
 function changeLanguage(lang) {
   currentLang = lang;
   
-  // No need to update active button - radio buttons handle this automatically
-  
   // Set RTL/LTR direction
   document.documentElement.setAttribute('dir', lang === 'he' ? 'rtl' : 'ltr');
   document.body.style.textAlign = lang === 'he' ? 'right' : 'left';
   
-  // Translate all text elements
   const t = translations[lang];
+  const selectedPeriod = document.querySelector('input[name="offeringPeriod"]:checked').value;
   
-  // Main title
+  // Update title
   document.querySelector('h1').textContent = t.title;
   
-  // Update offering period configuration for date labels
-  if (lang === 'he') {
-    OFFERING_PERIODS['oct-mar'] = { startDate: '1 באוקטובר', endDate: '31 במרץ' };
-    OFFERING_PERIODS['apr-sep'] = { startDate: '1 באפריל', endDate: '30 בספטמבר' };
-  } else {
-    OFFERING_PERIODS['oct-mar'] = { startDate: 'October 1', endDate: 'March 31' };
-    OFFERING_PERIODS['apr-sep'] = { startDate: 'April 1', endDate: 'September 30' };
-  }
-  
-  // Update current period dates in all locations
-  const selectedPeriod = document.querySelector('input[name="offeringPeriod"]:checked').value;
+  // Update configurations and dates
+  updateOfferingPeriodsConfig(lang);
   const currentPeriodConfig = OFFERING_PERIODS[selectedPeriod];
+  updatePriceLabels(lang, t, currentPeriodConfig);
+  updateResultDates(currentPeriodConfig);
   
-  if (lang === 'he') {
-    // In Hebrew mode, update entire label text (no spans)
-    const startLabel = document.querySelectorAll('label[for="priceA"]')[0];
-    const endLabel = document.querySelectorAll('label[for="priceB"]')[0];
-    if (startLabel) startLabel.innerHTML = t.startPriceLabel + currentPeriodConfig.startDate;
-    if (endLabel) endLabel.innerHTML = t.endPriceLabel + currentPeriodConfig.endDate;
-  } else {
-    // In English mode, ensure span structure exists and update
-    const startLabel = document.querySelectorAll('label[for="priceA"]')[0];
-    const endLabel = document.querySelectorAll('label[for="priceB"]')[0];
-    
-    if (startLabel) {
-      startLabel.innerHTML = '<span id="startDateLabel">' + currentPeriodConfig.startDate + '</span> ' + t.startPriceLabel;
-    }
-    if (endLabel) {
-      endLabel.innerHTML = '<span id="endDateLabel">' + currentPeriodConfig.endDate + '</span> ' + t.endPriceLabel;
-    }
-    
-    // Re-initialize element references after changing HTML
-    elements.startDateLabel = document.getElementById('startDateLabel');
-    elements.endDateLabel = document.getElementById('endDateLabel');
-  }
+  // Update form elements
+  updateBasicLabels(t);
+  updateTooltips(t);
+  updateRadioLabels(t);
+  updateToggleLabel(t);
   
-  // Update result section dates if they exist
-  if (elements.endDateResult) elements.endDateResult.textContent = currentPeriodConfig.endDate;
-  if (elements.endDateProfit) elements.endDateProfit.textContent = currentPeriodConfig.endDate;
-  if (elements.endDateTax) elements.endDateTax.textContent = currentPeriodConfig.endDate;
-  
-  // Update all labels, placeholders, and tooltips
-  const labelElements = [
-    document.querySelector('label[for="offeringPeriod"]'),
-    null, // Skip priceA - handled separately above
-    null, // Skip priceB - handled separately above
-    document.querySelector('label[for="priceToday"]'),
-    document.querySelector('label[for="actualShares"]'),
-    document.querySelector('label[for="contribution"]'),
-    document.querySelector('label[for="salary"]'),
-    document.querySelector('label[for="exchangeRate"]')
-  ];
-  
-  const labelKeys = ['selectPeriod', null, null, 'todayPriceLabel', 
-                'actualSharesLabel', 'contributionLabel', 'salaryLabel', 'exchangeRateLabel'];
-  
-  labelElements.forEach((label, index) => {
-    if (label && labelKeys[index]) {
-      const textNode = Array.from(label.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
-      if (textNode) {
-        textNode.textContent = ' ' + t[labelKeys[index]];
-      } else {
-        label.childNodes[0].textContent = t[labelKeys[index]];
-      }
-    }
-  });
-  
-  document.querySelectorAll('.tooltip-text').forEach((tooltip, index) => {
-    const keys = ['periodTooltip', 'startPriceTooltip', 'endPriceTooltip', 'todayPriceTooltip',
-                  'actualSharesTooltip', 'contributionTooltip', 'salaryTooltip', 'exchangeRateTooltip'];
-    if (keys[index]) tooltip.textContent = t[keys[index]];
-  });
-  
-  document.querySelectorAll('.radio-label').forEach((label, index) => {
-    label.textContent = index === 0 ? t.periodOctMar : t.periodAprSep;
-  });
-  
+  // Update placeholders and buttons
   elements.selectedValueSpan.textContent = t.contributionPlaceholder;
-  
-  // Update toggle label - find the text node after the toggle switch
-  const toggleLabel = document.querySelector('.toggle-label');
-  if (toggleLabel) {
-    const textNodes = Array.from(toggleLabel.childNodes).filter(node => node.nodeType === Node.TEXT_NODE);
-    if (textNodes.length > 0) {
-      // Add space before text for proper spacing
-      textNodes[textNodes.length - 1].textContent = ' ' + t.actualSharesToggle;
-    }
-  }
-  
   document.querySelector('button[onclick="calculate()"]').textContent = t.calculateButton;
   
-  // Results section
-  document.querySelector('.results-header').textContent = t.resultsHeader;
+  // Update results and charts
+  updateResultsLabels(t);
+  updateChartLabels(t);
+  updateHighlightLabels(lang, t);
   
-  // Translate result labels
-  const resultLabels = document.querySelectorAll('.result-item .result-label');
-  resultLabels.forEach(label => {
-    const text = label.textContent;
-    if (text.includes('Lower Stock Price') || text.includes('מחיר המניה הנמוך')) {
-      label.textContent = t.lowerStockPrice;
-    } else if (text.includes('Purchase Price - 15%') || text.includes('מחיר רכישה - 15%')) {
-      label.textContent = t.purchasePriceDiscount;
-    } else if (text.includes('Total ESPP Contributions (6 months) - USD') || text.includes('סה"כ הפרשות ESPP (6 חודשים) - דולר')) {
-      label.textContent = t.totalContributionUSD;
-    }
-  });
-  
-  document.querySelector('#monthlyContributionRow .result-label').textContent = t.monthlyContribution;
-  document.querySelector('#totalContributionNISRow .result-label').textContent = t.totalContributionNIS;
-  
-  const sharesLabelElem = Array.from(document.querySelectorAll('.result-label')).find(el => 
-    el.textContent.includes('Number of Shares') || el.textContent.includes('מספר המניות')
-  );
-  if (sharesLabelElem) sharesLabelElem.textContent = t.sharesLabel;
-  
-  // Charts
-  const chartTitle = document.querySelector('.chart-title');
-  if (chartTitle) chartTitle.textContent = t.chartTitle;
-  
-  const chartTitles = document.querySelectorAll('.chart-card-title');
-  if (chartTitles[0]) chartTitles[0].textContent = t.priceComparisonTitle;
-  if (chartTitles[1]) chartTitles[1].textContent = t.profitBreakdownTitle;
-  
-  const priceBarLabels = document.querySelectorAll('.price-bar-label');
-  if (priceBarLabels[0]) priceBarLabels[0].textContent = t.startPriceBar;
-  if (priceBarLabels[1]) priceBarLabels[1].textContent = t.endPriceBar;
-  if (priceBarLabels[2]) priceBarLabels[2].textContent = t.purchasePriceBar;
-  
-  const summaryLabel = document.querySelector('.summary-label');
-  if (summaryLabel) summaryLabel.textContent = t.totalContributionUSD;
-  
-  const segmentLabels = document.querySelectorAll('.segment-label');
-  if (segmentLabels[0]) segmentLabels[0].textContent = t.contributionSegment;
-  if (segmentLabels[1]) segmentLabels[1].textContent = t.profitSegment;
-  
-  // Highlight section - find all result items in highlight box
-  const highlightItems = document.querySelectorAll('.highlight .result-item');
-  
-  highlightItems.forEach((item) => {
-    const label = item.querySelector('.result-label');
-    if (!label) return;
-    
-    const labelText = label.textContent;
-    
-    // Check which label this is and translate accordingly
-    if (labelText.includes('Value at') || labelText.includes('ערכן ב')) {
-      const dateSpan = label.querySelector('span');
-      if (dateSpan) {
-        const dateText = translateDate(dateSpan.textContent, lang);
-        // Add space for English, hyphen for Hebrew
-        const separator = lang === 'he' ? '' : ' ';
-        label.innerHTML = t.valueAtDate + separator + '<span id="endDateResult">' + dateText + '</span>';
-      }
-    } else if ((labelText.includes('Value Today') || labelText.includes('ערכן היום')) && !labelText.includes('Profit')) {
-      label.textContent = t.valueTodayLabel;
-    } else if (labelText.includes('Instant Profit') || labelText.includes('הרווח המיידי')) {
-      const dateSpan = label.querySelector('span');
-      if (dateSpan) {
-        const dateText = translateDate(dateSpan.textContent, lang);
-        // Add space for English, hyphen for Hebrew
-        const separator = lang === 'he' ? '' : ' ';
-        label.innerHTML = t.profitAtDate + separator + '<span id="endDateProfit">' + dateText + '</span> ' + t.profitValueMinus;
-      }
-    } else if (labelText.includes('Total Profit Today') || labelText.includes('הרווח הכולל')) {
-      label.textContent = t.profitTodayLabel;
-    }
-  });
-  
-  // Collapsible sections  
-  const feesTitleElem = document.querySelector('[onclick="toggleFeesInfo()"] strong');
-  if (feesTitleElem) feesTitleElem.textContent = t.feesTitle;
-  
-  const taxTitleElem = document.querySelector('[onclick="toggleTaxInfo()"] strong');
-  if (taxTitleElem) taxTitleElem.textContent = t.taxTitle;
-  
-  // Update collapsible content
-  const feesContent = document.querySelector('#feesContent .collapsible-content-inner');
-  if (feesContent) {
-    feesContent.innerHTML = `
-      <strong style="color: #2c5282">${t.feesPurchase}</strong>
-      ${t.feesPurchaseText}<br/><br/>
-      <strong style="color: #2c5282">${t.feesSelling}</strong>
-      ${t.feesSellingText}
-    `;
-  }
-  
-  const taxContent = document.querySelector('#taxContent .collapsible-content-inner');
-  if (taxContent) {
-    const endDate = elements.endDateTax ? elements.endDateTax.textContent : (lang === 'he' ? '31 במרץ' : 'March 31');
-    taxContent.innerHTML = `
-      <strong>${t.taxImportant}</strong>
-      ${t.taxImportantText}
-      <strong>${t.taxWhenBuy} (<span>${endDate}</span>):</strong>
-      ${t.taxWhenBuyText}
-      <strong>${t.taxWhenSell}</strong>
-      ${t.taxWhenSellText}
-    `;
-  }
+  // Update collapsible sections
+  updateCollapsibleSections(lang, t);
 }
 
 /**

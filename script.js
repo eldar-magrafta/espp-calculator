@@ -3,135 +3,170 @@
 // Translation Data
 const translations = {
   en: {
-    title: 'ESPP Calculator',
-    selectPeriod: 'Select Offering Period',
-    periodTooltip: 'Choose your ESPP offering period. Each period is 6 months long.',
-    periodOctMar: 'October → March',
-    periodAprSep: 'April → September',
-    startPriceLabel: 'Stock Price',
-    endPriceLabel: 'Stock Price',
-    startPriceTooltip: 'Enter the stock price at the beginning of the offering period.',
-    endPriceTooltip: 'Enter the stock price at the end of the offering period.',
-    todayPriceLabel: 'Today\'s Stock Price (Optional)',
-    todayPriceTooltip: 'Enter today\'s stock price to see what your shares would be worth today if you haven\'t sold them yet after the purchase date.',
-    todayPricePlaceholder: 'USD $ - Leave empty if not applicable',
-    actualSharesToggle: 'I already received the shares',
-    actualSharesTooltip: 'Enable this toggle if you already received your shares and know the exact number. When enabled, you\'ll enter the actual shares received, and the calculator will skip the salary and contribution fields. When disabled, the calculator will estimate shares based on your salary and contribution percentage.',
-    actualSharesLabel: 'Actual Shares Received',
-    actualSharesPlaceholder: 'Enter actual shares received',
-    contributionLabel: 'ESPP Contribution %',
-    contributionTooltip: 'Select what percentage of your salary (1-20%) you want to contribute to ESPP each month.',
-    contributionPlaceholder: 'Select percentage',
-    salaryLabel: 'Monthly Base Salary (NIS)',
-    salaryTooltip: 'Enter your gross monthly salary in NIS before taxes. This is used to calculate your ESPP contribution amount.',
-    salaryPlaceholder: 'NIS ₪',
-    exchangeRateLabel: 'NIS to USD Exchange Rate',
-    exchangeRateTooltip: 'Enter the current exchange rate from NIS to USD (e.g., 3.60 means 1 USD = 3.60 NIS). Check current rates online.',
-    exchangeRatePlaceholder: 'e.g., 3.60',
-    calculateButton: 'Calculate',
-    resultsHeader: 'Calculation Results',
-    monthlyContribution: 'Monthly Contribution (NIS)',
-    totalContributionNIS: 'Total ESPP Contributions (6 months) - NIS',
-    sharesLabel: 'Number of Shares You\'ll Get',
-    chartTitle: 'Visual Breakdown',
-    priceComparisonTitle: 'Stock Price Comparison',
-    startPriceBar: 'Start Price',
-    endPriceBar: 'End Price',
-    purchasePriceBar: 'Your Purchase Price (15% off)',
-    profitBreakdownTitle: 'Profit Breakdown',
-    totalContributionUSD: 'Total Contribution (USD)',
-    contributionSegment: 'Your Contribution',
-    profitSegment: 'Your Profit',
-    valueAtDate: 'Their Value at',
-    valueTodayLabel: 'Their Value Today',
-    profitAtDate: 'Your Instant Profit at',
-    profitValueMinus: '(Value - Contribution)',
-    profitTodayLabel: 'Your Total Profit Today (Value Today - Contribution)',
-    
+    title: "ESPP Calculator",
+    selectPeriod: "Select Offering Period",
+    periodTooltip:
+      "Choose your ESPP offering period. Each period is 6 months long.",
+    periodOctMar: "October → March",
+    periodAprSep: "April → September",
+    startPriceLabel: "Stock Price",
+    endPriceLabel: "Stock Price",
+    startPriceTooltip:
+      "Enter the stock price at the beginning of the offering period.",
+    endPriceTooltip: "Enter the stock price at the end of the offering period.",
+    todayPriceLabel: "Today's Stock Price (Optional)",
+    todayPriceTooltip:
+      "Enter today's stock price to see what your shares would be worth today if you haven't sold them yet after the purchase date.",
+    todayPricePlaceholder: "USD $ - Leave empty if not applicable",
+    actualSharesToggle: "I already received the shares",
+    actualSharesTooltip:
+      "Enable this toggle if you already received your shares and know the exact number. When enabled, you'll enter the actual shares received, and the calculator will skip the salary and contribution fields. When disabled, the calculator will estimate shares based on your salary and contribution percentage.",
+    actualSharesLabel: "Actual Shares Received",
+    actualSharesPlaceholder: "Enter actual shares received",
+    contributionLabel: "ESPP Contribution %",
+    contributionTooltip:
+      "Select what percentage of your salary (1-20%) you want to contribute to ESPP each month.",
+    contributionPlaceholder: "Select percentage",
+    salaryLabel: "Monthly Base Salary (NIS)",
+    salaryTooltip:
+      "Enter your gross monthly salary in NIS before taxes. This is used to calculate your ESPP contribution amount.",
+    salaryPlaceholder: "NIS ₪",
+    exchangeRateLabel: "NIS to USD Exchange Rate",
+    exchangeRateTooltip:
+      "Enter the current exchange rate from NIS to USD (e.g., 3.60 means 1 USD = 3.60 NIS). Check current rates online.",
+    exchangeRatePlaceholder: "e.g., 3.60",
+    calculateButton: "Calculate",
+    resultsHeader: "Calculation Results",
+    monthlyContribution: "Monthly Contribution (NIS)",
+    totalContributionNIS: "Total ESPP Contributions (6 months) - NIS",
+    sharesLabel: "Number of Shares You'll Get",
+    chartTitle: "Visual Breakdown",
+    priceComparisonTitle: "Stock Price Comparison",
+    startPriceBar: "Start Price",
+    endPriceBar: "End Price",
+    purchasePriceBar: "Your Purchase Price (15% off)",
+    profitBreakdownTitle: "Profit Breakdown",
+    totalContributionUSD: "Total Contribution (USD)",
+    contributionSegment: "Your Contribution",
+    profitSegment: "Your Profit",
+    valueAtDate: "Their Value at",
+    valueTodayLabel: "Their Value Today",
+    profitAtDate: "Your Instant Profit at",
+    profitValueMinus: "(Value - Contribution)",
+    profitTodayLabel: "Your Total Profit Today (Value Today - Contribution)",
+
+    // Tax benefit labels
+    taxInfoHeader: "📋 Immediate Tax Impact",
+    taxableBenefitUSD: "Taxable Benefit (USD)",
+    actualTaxUSD: "Actual Tax Taken (USD)",
+    taxInfoNote:
+      "This amount will be added to your salary and taxed according to your income tax bracket.",
+
     // Results section labels
-    lowerStockPrice: 'Lower Stock Price',
-    purchasePriceDiscount: 'Purchase Price - 15% Discount',
-    totalContributionUSD: 'Total ESPP Contributions (6 months) - USD',
-    feesTitle: '💰Important Information About Fees',
-    feesPurchase: 'Purchase Fees (Covered by MSI):',
-    feesPurchaseText: 'When you buy shares through the ESPP, E*TRADE charges a transaction fee. The good news: Motorola Solutions pays these purchase fees for you!',
-    feesSelling: 'Selling Fees (Your Responsibility):',
-    feesSellingText: 'When you sell your ESPP shares, E*TRADE will charge a selling fee. You are responsible for paying these fees. Make sure to factor this into your calculations when planning to sell.',
-    taxTitle: '💡Understanding Your ESPP and Taxes',
+    lowerStockPrice: "Lower Stock Price",
+    purchasePriceDiscount: "Purchase Price - 15% Discount",
+    totalContributionUSD: "Total ESPP Contributions (6 months) - USD",
+    feesTitle: "💰Important Information About Fees",
+    feesPurchase: "Purchase Fees (Covered by MSI):",
+    feesPurchaseText:
+      "When you buy shares through the ESPP, E*TRADE charges a transaction fee. The good news: Motorola Solutions pays these purchase fees for you!",
+    feesSelling: "Selling Fees (Your Responsibility):",
+    feesSellingText:
+      "When you sell your ESPP shares, E*TRADE will charge a selling fee. You are responsible for paying these fees. Make sure to factor this into your calculations when planning to sell.",
+    taxTitle: "💡Understanding Your ESPP and Taxes",
     taxImportant: 'Important: This is "after-tax" money',
-    taxImportantText: 'Your ESPP contribution is deducted from your salary after income tax has already been calculated and paid. For example, if your base salary is 25,000 NIS and you contribute 20%, you\'re contributing 5,000 NIS that you\'ve already paid income tax on. This means the ESPP contribution comes from "after-tax" money.',
-    taxWhenBuy: 'When you buy the shares',
-    taxWhenBuyText: 'No additional tax is owed at that moment. The shares just appear in your E*TRADE account.',
-    taxWhenSell: 'When you sell the shares (in the future):',
-    taxWhenSellText: 'You\'ll only pay tax on the PROFIT you made (the difference between what you paid and what you sold them for). You won\'t be taxed again on the original contribution (the 5,000 NIS in our example) because you already paid tax on it when it was part of your salary.'
+    taxImportantText:
+      "Your ESPP contribution is deducted from your salary after income tax has already been calculated and paid. For example, if your base salary is 25,000 NIS and you contribute 20%, you're contributing 5,000 NIS that you've already paid income tax on. This means the ESPP contribution comes from \"after-tax\" money.",
+    taxWhenBuy: "When you buy the shares",
+    taxWhenBuyText:
+      "The company calculates your taxable benefit as: (End Price - Purchase Price) × Number of Shares × Exchange Rate. This benefit is added to your salary for tax purposes, and you pay income tax on it according to your tax bracket.",
+    taxWhenSell: "When you sell the shares (in the future):",
+    taxWhenSellText:
+      "You'll pay 25% capital gains tax on any additional profit (the difference between the end-of-period price and your selling price). You won't be taxed again on the original contribution or the initial benefit.",
   },
   he: {
-    title: 'מחשבון ESPP',
-    selectPeriod: 'בחר תקופת הצעה',
-    periodTooltip: 'בחר את תקופת ההצעה של ESPP שלך. כל תקופה היא 6 חודשים.',
-    periodOctMar: 'אוקטובר ← מרץ',
-    periodAprSep: 'אפריל ← ספטמבר',
-    startPriceLabel: 'מחיר המניה ב-',
-    endPriceLabel: 'מחיר המניה ב-',
-    startPriceTooltip: 'הזן את מחיר המניה בתחילת תקופת ההצעה.',
-    endPriceTooltip: 'הזן את מחיר המניה בסוף תקופת ההצעה.',
-    todayPriceLabel: 'מחיר המניה היום (אופציונלי)',
-    todayPriceTooltip: 'הזן את מחיר המניה של היום כדי לראות כמה המניות שלך שוות היום אם עדיין לא מכרת אותן לאחר תאריך הרכישה.',
-    todayPricePlaceholder: 'דולר $ - השאר ריק אם לא רלוונטי',
-    actualSharesToggle: 'כבר קיבלתי את המניות',
-    actualSharesTooltip: 'הפעל אפשרות זו אם כבר קיבלת את המניות ואתה יודע את המספר המדויק. כאשר מופעל, תזין את המניות בפועל שהתקבלו, והמחשבון ידלג על שדות המשכורת וההפרשה. כאשר כבוי, המחשבון יעריך מניות על סמך המשכורת ואחוז ההפרשה שלך.',
-    actualSharesLabel: 'מניות בפועל שהתקבלו',
-    actualSharesPlaceholder: 'הזן מניות בפועל שהתקבלו',
-    contributionLabel: 'אחוז הפרשה ל-ESPP',
-    contributionTooltip: 'בחר איזה אחוז מהמשכורת שלך (1-20%) אתה רוצה להפריש ל-ESPP כל חודש.',
-    contributionPlaceholder: 'בחר אחוז',
+    title: "מחשבון ESPP",
+    selectPeriod: "בחר תקופת הצעה",
+    periodTooltip: "בחר את תקופת ההצעה של ESPP שלך. כל תקופה היא 6 חודשים.",
+    periodOctMar: "אוקטובר ← מרץ",
+    periodAprSep: "אפריל ← ספטמבר",
+    startPriceLabel: "מחיר המניה ב-",
+    endPriceLabel: "מחיר המניה ב-",
+    startPriceTooltip: "הזן את מחיר המניה בתחילת תקופת ההצעה.",
+    endPriceTooltip: "הזן את מחיר המניה בסוף תקופת ההצעה.",
+    todayPriceLabel: "מחיר המניה היום (אופציונלי)",
+    todayPriceTooltip:
+      "הזן את מחיר המניה של היום כדי לראות כמה המניות שלך שוות היום אם עדיין לא מכרת אותן לאחר תאריך הרכישה.",
+    todayPricePlaceholder: "דולר $ - השאר ריק אם לא רלוונטי",
+    actualSharesToggle: "כבר קיבלתי את המניות",
+    actualSharesTooltip:
+      "הפעל אפשרות זו אם כבר קיבלת את המניות ואתה יודע את המספר המדויק. כאשר מופעל, תזין את המניות בפועל שהתקבלו, והמחשבון ידלג על שדות המשכורת וההפרשה. כאשר כבוי, המחשבון יעריך מניות על סמך המשכורת ואחוז ההפרשה שלך.",
+    actualSharesLabel: "מניות בפועל שהתקבלו",
+    actualSharesPlaceholder: "הזן מניות בפועל שהתקבלו",
+    contributionLabel: "אחוז הפרשה ל-ESPP",
+    contributionTooltip:
+      "בחר איזה אחוז מהמשכורת שלך (1-20%) אתה רוצה להפריש ל-ESPP כל חודש.",
+    contributionPlaceholder: "בחר אחוז",
     salaryLabel: 'משכורת בסיס חודשית (ש"ח)',
-    salaryTooltip: 'הזן את המשכורת החודשית ברוטו בש"ח לפני מסים. זה משמש לחישוב סכום ההפרשה ל-ESPP שלך.',
+    salaryTooltip:
+      'הזן את המשכורת החודשית ברוטו בש"ח לפני מסים. זה משמש לחישוב סכום ההפרשה ל-ESPP שלך.',
     salaryPlaceholder: 'ש"ח ₪',
     exchangeRateLabel: 'שער החליפין ש"ח לדולר',
-    exchangeRateTooltip: 'הזן את שער החליפין הנוכחי מש"ח לדולר (למשל, 3.60 פירושו 1 דולר = 3.60 ש"ח). בדוק שערים נוכחיים באינטרנט.',
-    exchangeRatePlaceholder: 'למשל, 3.60',
-    calculateButton: 'חשב',
-    resultsHeader: 'תוצאות החישוב',
+    exchangeRateTooltip:
+      'הזן את שער החליפין הנוכחי מש"ח לדולר (למשל, 3.60 פירושו 1 דולר = 3.60 ש"ח). בדוק שערים נוכחיים באינטרנט.',
+    exchangeRatePlaceholder: "למשל, 3.60",
+    calculateButton: "חשב",
+    resultsHeader: "תוצאות החישוב",
     monthlyContribution: 'הפרשה חודשית (ש"ח)',
     totalContributionNIS: 'סה"כ הפרשות ESPP (6 חודשים) - ש"ח',
-    sharesLabel: 'מספר המניות שתקבל',
-    chartTitle: 'פירוט חזותי',
-    priceComparisonTitle: 'השוואת מחירי מניות',
-    startPriceBar: 'מחיר התחלה',
-    endPriceBar: 'מחיר סיום',
-    purchasePriceBar: 'מחיר הרכישה שלך (15% הנחה)',
-    profitBreakdownTitle: 'פירוט רווח',
+    sharesLabel: "מספר המניות שתקבל",
+    chartTitle: "פירוט חזותי",
+    priceComparisonTitle: "השוואת מחירי מניות",
+    startPriceBar: "מחיר התחלה",
+    endPriceBar: "מחיר סיום",
+    purchasePriceBar: "מחיר הרכישה שלך (15% הנחה)",
+    profitBreakdownTitle: "פירוט רווח",
     totalContributionUSD: 'סה"כ הפרשה (דולר)',
-    contributionSegment: 'ההפרשה שלך',
-    profitSegment: 'הרווח שלך',
-    valueAtDate: 'ערכן ב-',
-    valueTodayLabel: 'ערכן היום',
-    profitAtDate: 'הרווח המיידי שלך ב-',
-    profitValueMinus: '(ערך פחות הפרשה)',
-    profitTodayLabel: 'הרווח הכולל שלך היום (ערך היום פחות הפרשה)',
-    
+    contributionSegment: "ההפרשה שלך",
+    profitSegment: "הרווח שלך",
+    valueAtDate: "ערכן ב-",
+    valueTodayLabel: "ערכן היום",
+    profitAtDate: "הרווח המיידי שלך ב-",
+    profitValueMinus: "(ערך פחות הפרשה)",
+    profitTodayLabel: "הרווח הכולל שלך היום (ערך היום פחות הפרשה)",
+
+    // Tax benefit labels
+    taxInfoHeader: "📋 השפעת מס מיידית",
+    taxableBenefitUSD: "הטבה חייבת במס (דולר)",
+    actualTaxUSD: "מס בפועל שנלקח (דולר)",
+    taxInfoNote: "סכום זה יתווסף למשכורת שלך וימוסה בהתאם למדרגת המס שלך.",
+
     // Results section labels
-    lowerStockPrice: 'מחיר המניה הנמוך יותר',
-    purchasePriceDiscount: 'מחיר רכישה - 15% הנחה',
+    lowerStockPrice: "מחיר המניה הנמוך יותר",
+    purchasePriceDiscount: "מחיר רכישה - 15% הנחה",
     totalContributionUSD: 'סה"כ הפרשות ESPP (6 חודשים) - דולר',
-    feesTitle: '💰מידע חשוב על עמלות',
-    feesPurchase: 'עמלות רכישה (מכוסות על ידי MSI):',
-    feesPurchaseText: 'כאשר אתה קונה מניות דרך ESPP, E*TRADE גובה עמלת עסקה. החדשות הטובות: Motorola Solutions משלמת את עמלות הרכישה האלה עבורך!',
-    feesSelling: 'עמלות מכירה (באחריותך):',
-    feesSellingText: 'כאשר אתה מוכר את מניות ה-ESPP שלך, E*TRADE תגבה עמלת מכירה. אתה אחראי לתשלום העמלות האלה. הקפד לקחת זאת בחשבון בחישובים שלך כאשר אתה מתכנן למכור.',
-    taxTitle: '💡הבנת ה-ESPP והמסים שלך',
+    feesTitle: "💰מידע חשוב על עמלות",
+    feesPurchase: "עמלות רכישה (מכוסות על ידי MSI):",
+    feesPurchaseText:
+      "כאשר אתה קונה מניות דרך ESPP, E*TRADE גובה עמלת עסקה. החדשות הטובות: Motorola Solutions משלמת את עמלות הרכישה האלה עבורך!",
+    feesSelling: "עמלות מכירה (באחריותך):",
+    feesSellingText:
+      "כאשר אתה מוכר את מניות ה-ESPP שלך, E*TRADE תגבה עמלת מכירה. אתה אחראי לתשלום העמלות האלה. הקפד לקחת זאת בחשבון בחישובים שלך כאשר אתה מתכנן למכור.",
+    taxTitle: "💡הבנת ה-ESPP והמסים שלך",
     taxImportant: 'חשוב: זה כסף "אחרי מס"',
-    taxImportantText: 'ההפרשה ל-ESPP שלך מנוכה מהמשכורת שלך לאחר שמס הכנסה כבר חושב ושולם. לדוגמה, אם משכורת הבסיס שלך היא 25,000 ש"ח ואתה מפריש 20%, אתה מפריש 5,000 ש"ח שכבר שילמת עליהם מס הכנסה. זה אומר שההפרשה ל-ESPP באה מכסף "אחרי מס".',
-    taxWhenBuy: 'כאשר אתה קונה את המניות',
-    taxWhenBuyText: 'אין מס נוסף שחייב באותו רגע. המניות פשוט מופיעות בחשבון E*TRADE שלך.',
-    taxWhenSell: 'כאשר אתה מוכר את המניות (בעתיד):',
-    taxWhenSellText: 'תשלם מס רק על הרווח שעשית (ההפרש בין מה ששילמת למה שמכרת אותן). לא תמוסה שוב על ההפרשה המקורית (5,000 ש"ח בדוגמה שלנו) כי כבר שילמת עליה מס כשהיא הייתה חלק מהמשכורת שלך.'
-  }
+    taxImportantText:
+      'ההפרשה ל-ESPP שלך מנוכה מהמשכורת שלך לאחר שמס הכנסה כבר חושב ושולם. לדוגמה, אם משכורת הבסיס שלך היא 25,000 ש"ח ואתה מפריש 20%, אתה מפריש 5,000 ש"ח שכבר שילמת עליהם מס הכנסה. זה אומר שההפרשה ל-ESPP באה מכסף "אחרי מס".',
+    taxWhenBuy: "כאשר אתה קונה את המניות",
+    taxWhenBuyText:
+      "החברה מחשבת את ההטבה החייבת במס שלך כך: (מחיר סוף - מחיר רכישה) × מספר מניות × שער חליפין. הטבה זו מתווספת למשכורת שלך למטרות מס, ואתה משלם עליה מס הכנסה לפי מדרגת המס שלך.",
+    taxWhenSell: "כאשר אתה מוכר את המניות (בעתיד):",
+    taxWhenSellText:
+      "תשלם מס רווחי הון בשיעור 25% על כל רווח נוסף (ההפרש בין מחיר סוף התקופה למחיר המכירה שלך). לא תמוסה שוב על ההפרשה המקורית או על ההטבה הראשונית.",
+  },
 };
 
 // Current Language
-let currentLang = 'en';
+let currentLang = "en";
 
 // Calculation Constants
 const ESPP_DISCOUNT = 0.15;
@@ -141,39 +176,39 @@ const MIN_CONTRIBUTION_PERCENT = 1;
 
 // Color Constants
 const COLORS = {
-  PROFIT_POSITIVE: '#48bb78',
-  PROFIT_NEGATIVE: '#f56565'
+  PROFIT_POSITIVE: "#48bb78",
+  PROFIT_NEGATIVE: "#f56565",
 };
 
 // CSS Class Names
 const CSS_CLASSES = {
-  ERROR: 'error',
-  ACTIVE: 'active',
-  HIDDEN: 'hidden',
-  PLACEHOLDER: 'placeholder',
-  SELECTED: 'selected',
-  OPEN: 'open'
+  ERROR: "error",
+  ACTIVE: "active",
+  HIDDEN: "hidden",
+  PLACEHOLDER: "placeholder",
+  SELECTED: "selected",
+  OPEN: "open",
 };
 
 // Display Text Constants
 const DISPLAY_TEXT = {
-  NOT_AVAILABLE: 'N/A',
-  SHARES_SUFFIX: ' shares',
-  ACTUAL_SUFFIX: ' (actual)',
-  CURRENCY_USD: '$',
-  CURRENCY_NIS: 'ILS '
+  NOT_AVAILABLE: "N/A",
+  SHARES_SUFFIX: " shares",
+  ACTUAL_SUFFIX: " (actual)",
+  CURRENCY_USD: "$",
+  CURRENCY_NIS: "ILS ",
 };
 
 // Offering Period Configuration
 const OFFERING_PERIODS = {
-  'oct-mar': {
-    startDate: 'October 1',
-    endDate: 'March 31'
+  "oct-mar": {
+    startDate: "October 1",
+    endDate: "March 31",
   },
-  'apr-sep': {
-    startDate: 'April 1',
-    endDate: 'September 30'
-  }
+  "apr-sep": {
+    startDate: "April 1",
+    endDate: "September 30",
+  },
 };
 
 // ==================== DOM ELEMENTS ====================
@@ -188,55 +223,65 @@ function initializeElements() {
   elements = {
     // Period Selection Elements
     periodRadios: document.querySelectorAll('input[name="offeringPeriod"]'),
-    startDateLabel: document.getElementById('startDateLabel'),
-    endDateLabel: document.getElementById('endDateLabel'),
-    endDateResult: document.getElementById('endDateResult'),
-    endDateProfit: document.getElementById('endDateProfit'),
-    endDateTax: document.getElementById('endDateTax'),
-    
+    startDateLabel: document.getElementById("startDateLabel"),
+    endDateLabel: document.getElementById("endDateLabel"),
+    endDateResult: document.getElementById("endDateResult"),
+    endDateProfit: document.getElementById("endDateProfit"),
+    endDateTax: document.getElementById("endDateTax"),
+
     // Custom Select Elements
-    customSelect: document.getElementById('customSelect'),
-    contributionInput: document.getElementById('contribution'),
-    selectedValueSpan: document.getElementById('selectedValue'),
-    
+    customSelect: document.getElementById("customSelect"),
+    contributionInput: document.getElementById("contribution"),
+    selectedValueSpan: document.getElementById("selectedValue"),
+
     // Input Elements
-    priceA: document.getElementById('priceA'),
-    priceB: document.getElementById('priceB'),
-    priceToday: document.getElementById('priceToday'),
-    useActualSharesCheckbox: document.getElementById('useActualShares'),
-    actualShares: document.getElementById('actualShares'),
-    salary: document.getElementById('salary'),
-    exchangeRate: document.getElementById('exchangeRate'),
-    
+    priceA: document.getElementById("priceA"),
+    priceB: document.getElementById("priceB"),
+    priceToday: document.getElementById("priceToday"),
+    useActualSharesCheckbox: document.getElementById("useActualShares"),
+    actualShares: document.getElementById("actualShares"),
+    salary: document.getElementById("salary"),
+    exchangeRate: document.getElementById("exchangeRate"),
+
     // Container Elements
-    actualSharesContainer: document.getElementById('actualSharesContainer'),
-    contributionGroup: document.getElementById('contributionGroup'),
-    salaryGroup: document.getElementById('salaryGroup'),
-    exchangeRateGroup: document.getElementById('exchangeRateGroup'),
-    
+    actualSharesContainer: document.getElementById("actualSharesContainer"),
+    contributionGroup: document.getElementById("contributionGroup"),
+    salaryGroup: document.getElementById("salaryGroup"),
+    exchangeRateGroup: document.getElementById("exchangeRateGroup"),
+
     // Result Display Elements
-    lowerPrice: document.getElementById('lowerPrice'),
-    purchasePrice: document.getElementById('purchasePrice'),
-    monthlyContribution: document.getElementById('monthlyContribution'),
-    totalContributionNIS: document.getElementById('totalContributionNIS'),
-    totalContribution: document.getElementById('totalContribution'),
-    shares: document.getElementById('shares'),
-    marketValue: document.getElementById('marketValue'),
-    marketValueToday: document.getElementById('marketValueToday'),
-    profit: document.getElementById('profit'),
-    profitToday: document.getElementById('profitToday'),
-    
+    lowerPrice: document.getElementById("lowerPrice"),
+    purchasePrice: document.getElementById("purchasePrice"),
+    monthlyContribution: document.getElementById("monthlyContribution"),
+    totalContributionNIS: document.getElementById("totalContributionNIS"),
+    totalContribution: document.getElementById("totalContribution"),
+    shares: document.getElementById("shares"),
+    marketValue: document.getElementById("marketValue"),
+    marketValueToday: document.getElementById("marketValueToday"),
+    profit: document.getElementById("profit"),
+    profitToday: document.getElementById("profitToday"),
+    taxableBenefitUSD: document.getElementById("taxableBenefitUSD"),
+
     // Result Row Elements
-    monthlyContributionRow: document.getElementById('monthlyContributionRow'),
-    totalContributionNISRow: document.getElementById('totalContributionNISRow'),
-    todayValueRow: document.getElementById('todayValueRow'),
-    todayProfitRow: document.getElementById('todayProfitRow')
+    monthlyContributionRow: document.getElementById("monthlyContributionRow"),
+    totalContributionNISRow: document.getElementById("totalContributionNISRow"),
+    todayValueRow: document.getElementById("todayValueRow"),
+    todayProfitRow: document.getElementById("todayProfitRow"),
+
+    taxableBenefitUSD: document.getElementById("taxableBenefitUSD"),
+    actualTaxUSD: document.getElementById("actualTaxUSD"),
   };
-  
+
   // Initialize custom select child elements
-  elements.selectTrigger = elements.customSelect.querySelector('.custom-select-trigger');
-  elements.selectDropdown = elements.customSelect.querySelector('.custom-select-dropdown');
-  elements.selectOptions = elements.customSelect.querySelectorAll('.custom-select-option');
+  elements.selectTrigger = elements.customSelect.querySelector(
+    ".custom-select-trigger"
+  );
+  elements.selectDropdown = elements.customSelect.querySelector(
+    ".custom-select-dropdown"
+  );
+  elements.selectOptions = elements.customSelect.querySelectorAll(
+    ".custom-select-option"
+  );
 }
 
 // ==================== UTILITY FUNCTIONS ====================
@@ -247,7 +292,7 @@ function initializeElements() {
  * @returns {string} Formatted number string
  */
 function formatNumber(num) {
-  return num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 /**
@@ -275,7 +320,7 @@ function formatNIS(amount) {
  * @returns {string} Formatted percentage string
  */
 function formatProfitPercentage(profit, totalContribution) {
-  return ((profit / totalContribution) * 100).toFixed(1) + '%';
+  return ((profit / totalContribution) * 100).toFixed(1) + "%";
 }
 
 /**
@@ -292,9 +337,9 @@ function validateNumericInput(value, min = 0) {
  * Clear all error styles from form inputs
  */
 function clearErrors() {
-  document.querySelectorAll('.' + CSS_CLASSES.ERROR).forEach(el => 
-    el.classList.remove(CSS_CLASSES.ERROR)
-  );
+  document
+    .querySelectorAll("." + CSS_CLASSES.ERROR)
+    .forEach((el) => el.classList.remove(CSS_CLASSES.ERROR));
 }
 
 /**
@@ -302,7 +347,7 @@ function clearErrors() {
  * @param {HTMLElement} element - Element to show
  */
 function showElement(element) {
-  element.style.display = 'flex';
+  element.style.display = "flex";
 }
 
 /**
@@ -310,7 +355,7 @@ function showElement(element) {
  * @param {HTMLElement} element - Element to hide
  */
 function hideElement(element) {
-  element.style.display = 'none';
+  element.style.display = "none";
 }
 
 /**
@@ -321,10 +366,12 @@ function updateDateLabels(period) {
   const config = OFFERING_PERIODS[period];
   elements.startDateLabel.textContent = config.startDate;
   elements.endDateLabel.textContent = config.endDate;
-  
+
   // Also update dates in results/highlight section if they exist
-  if (elements.endDateResult) elements.endDateResult.textContent = config.endDate;
-  if (elements.endDateProfit) elements.endDateProfit.textContent = config.endDate;
+  if (elements.endDateResult)
+    elements.endDateResult.textContent = config.endDate;
+  if (elements.endDateProfit)
+    elements.endDateProfit.textContent = config.endDate;
   if (elements.endDateTax) elements.endDateTax.textContent = config.endDate;
 }
 
@@ -353,7 +400,7 @@ function getInputValues() {
     monthlySalary: parseInt(elements.salary.value),
     exchangeRate: parseFloat(elements.exchangeRate.value),
     useActualShares: elements.useActualSharesCheckbox.checked,
-    actualSharesValue: parseFloat(elements.actualShares.value)
+    actualSharesValue: parseFloat(elements.actualShares.value),
   };
 }
 
@@ -366,31 +413,40 @@ function getInputValues() {
 function handlePeriodChange(event) {
   const period = event.target.value;
   const config = OFFERING_PERIODS[period];
-  
+
   // Check if we're in Hebrew mode
-  const isHebrew = currentLang === 'he';
-  
+  const isHebrew = currentLang === "he";
+
   if (isHebrew) {
     // In Hebrew mode, labels don't have spans, so update the entire label text
     const startLabel = document.querySelectorAll('label[for="priceA"]')[0];
     const endLabel = document.querySelectorAll('label[for="priceB"]')[0];
-    
-    if (startLabel) startLabel.textContent = translations.he.startPriceLabel + config.startDate;
-    if (endLabel) endLabel.textContent = translations.he.endPriceLabel + config.endDate;
+
+    if (startLabel)
+      startLabel.textContent =
+        translations.he.startPriceLabel + config.startDate;
+    if (endLabel)
+      endLabel.textContent = translations.he.endPriceLabel + config.endDate;
   } else {
     // In English mode, update the date spans
-    if (elements.startDateLabel) elements.startDateLabel.textContent = config.startDate;
-    if (elements.endDateLabel) elements.endDateLabel.textContent = config.endDate;
+    if (elements.startDateLabel)
+      elements.startDateLabel.textContent = config.startDate;
+    if (elements.endDateLabel)
+      elements.endDateLabel.textContent = config.endDate;
   }
-  
+
   // Update result section date labels if they exist
-  if (elements.endDateResult) elements.endDateResult.textContent = config.endDate;
-  if (elements.endDateProfit) elements.endDateProfit.textContent = config.endDate;
+  if (elements.endDateResult)
+    elements.endDateResult.textContent = config.endDate;
+  if (elements.endDateProfit)
+    elements.endDateProfit.textContent = config.endDate;
   if (elements.endDateTax) elements.endDateTax.textContent = config.endDate;
-  
+
   // If there are already results displayed, update those too
-  const highlightDateSpans = document.querySelectorAll('.highlight span[id^="endDate"]');
-  highlightDateSpans.forEach(span => {
+  const highlightDateSpans = document.querySelectorAll(
+    '.highlight span[id^="endDate"]'
+  );
+  highlightDateSpans.forEach((span) => {
     if (span) span.textContent = config.endDate;
   });
 }
@@ -410,22 +466,27 @@ function handleCustomSelectClick(e) {
  * @param {HTMLElement} option - Selected option element
  */
 function handleOptionClick(option) {
-  const value = option.getAttribute('data-value');
+  const value = option.getAttribute("data-value");
   const text = option.textContent;
-  
+
   elements.contributionInput.value = value;
   elements.selectedValueSpan.textContent = text;
-  
-  if (value !== '') {
+
+  if (value !== "") {
     elements.selectTrigger.classList.remove(CSS_CLASSES.PLACEHOLDER);
   } else {
     elements.selectTrigger.classList.add(CSS_CLASSES.PLACEHOLDER);
   }
-  
-  elements.selectOptions.forEach(opt => opt.classList.remove(CSS_CLASSES.SELECTED));
+
+  elements.selectOptions.forEach((opt) =>
+    opt.classList.remove(CSS_CLASSES.SELECTED)
+  );
   option.classList.add(CSS_CLASSES.SELECTED);
-  
-  elements.selectTrigger.classList.remove(CSS_CLASSES.ACTIVE, CSS_CLASSES.ERROR);
+
+  elements.selectTrigger.classList.remove(
+    CSS_CLASSES.ACTIVE,
+    CSS_CLASSES.ERROR
+  );
   elements.selectDropdown.classList.remove(CSS_CLASSES.ACTIVE);
 }
 
@@ -445,15 +506,15 @@ function handleDocumentClick(e) {
  */
 function handleActualSharesToggle() {
   const isChecked = elements.useActualSharesCheckbox.checked;
-  
+
   if (isChecked) {
-    elements.actualSharesContainer.style.display = 'block';
+    elements.actualSharesContainer.style.display = "block";
     elements.contributionGroup.classList.add(CSS_CLASSES.HIDDEN);
     elements.salaryGroup.classList.add(CSS_CLASSES.HIDDEN);
     elements.exchangeRateGroup.classList.add(CSS_CLASSES.HIDDEN);
   } else {
-    elements.actualSharesContainer.style.display = 'none';
-    elements.actualShares.value = '';
+    elements.actualSharesContainer.style.display = "none";
+    elements.actualShares.value = "";
     elements.actualShares.classList.remove(CSS_CLASSES.ERROR);
     elements.contributionGroup.classList.remove(CSS_CLASSES.HIDDEN);
     elements.salaryGroup.classList.remove(CSS_CLASSES.HIDDEN);
@@ -474,7 +535,7 @@ function handleInputChange(event) {
  * @param {Event} event - Keypress event
  */
 function handleEnterKey(event) {
-  if (event.key === 'Enter') {
+  if (event.key === "Enter") {
     calculate();
   }
 }
@@ -489,18 +550,18 @@ function handleEnterKey(event) {
 function validateInputs(useActualShares) {
   clearErrors();
   let hasError = false;
-  
+
   // Always required fields
   if (!validateNumericInput(parseFloat(elements.priceA.value))) {
     elements.priceA.classList.add(CSS_CLASSES.ERROR);
     hasError = true;
   }
-  
+
   if (!validateNumericInput(parseFloat(elements.priceB.value))) {
     elements.priceB.classList.add(CSS_CLASSES.ERROR);
     hasError = true;
   }
-  
+
   if (useActualShares) {
     // Actual shares mode validation
     if (!validateNumericInput(parseFloat(elements.actualShares.value))) {
@@ -510,22 +571,26 @@ function validateInputs(useActualShares) {
   } else {
     // Normal mode validation
     const contributionPercent = parseFloat(elements.contributionInput.value);
-    if (isNaN(contributionPercent) || contributionPercent < MIN_CONTRIBUTION_PERCENT || contributionPercent > MAX_CONTRIBUTION_PERCENT) {
+    if (
+      isNaN(contributionPercent) ||
+      contributionPercent < MIN_CONTRIBUTION_PERCENT ||
+      contributionPercent > MAX_CONTRIBUTION_PERCENT
+    ) {
       elements.selectTrigger.classList.add(CSS_CLASSES.ERROR);
       hasError = true;
     }
-    
+
     if (!validateNumericInput(parseInt(elements.salary.value))) {
       elements.salary.classList.add(CSS_CLASSES.ERROR);
       hasError = true;
     }
-    
+
     if (!validateNumericInput(parseFloat(elements.exchangeRate.value))) {
       elements.exchangeRate.classList.add(CSS_CLASSES.ERROR);
       hasError = true;
     }
   }
-  
+
   return !hasError;
 }
 
@@ -553,27 +618,47 @@ function calculatePurchasePrice(priceA, priceB) {
  * @param {number} purchasePrice - Price per share with discount
  * @returns {object} Calculation results
  */
-function calculateShares(useActualShares, actualSharesValue, monthlySalary, contributionPercent, exchangeRate, purchasePrice) {
+function calculateShares(
+  useActualShares,
+  actualSharesValue,
+  monthlySalary,
+  contributionPercent,
+  exchangeRate,
+  purchasePrice
+) {
   if (useActualShares) {
     const numberOfShares = actualSharesValue;
     const totalContribution = numberOfShares * purchasePrice;
-    
+
     let monthlyContribution = null;
     let totalContributionNIS = null;
-    
-    if (validateNumericInput(monthlySalary) && validateNumericInput(exchangeRate)) {
+
+    if (
+      validateNumericInput(monthlySalary) &&
+      validateNumericInput(exchangeRate)
+    ) {
       totalContributionNIS = totalContribution * exchangeRate;
       monthlyContribution = totalContributionNIS / OFFERING_PERIOD_MONTHS;
     }
-    
-    return { numberOfShares, totalContribution, monthlyContribution, totalContributionNIS };
+
+    return {
+      numberOfShares,
+      totalContribution,
+      monthlyContribution,
+      totalContributionNIS,
+    };
   } else {
     const monthlyContribution = monthlySalary * (contributionPercent / 100);
     const totalContributionNIS = monthlyContribution * OFFERING_PERIOD_MONTHS;
     const totalContribution = totalContributionNIS / exchangeRate;
     const numberOfShares = totalContribution / purchasePrice;
-    
-    return { numberOfShares, totalContribution, monthlyContribution, totalContributionNIS };
+
+    return {
+      numberOfShares,
+      totalContribution,
+      monthlyContribution,
+      totalContributionNIS,
+    };
   }
 }
 
@@ -585,19 +670,48 @@ function calculateShares(useActualShares, actualSharesValue, monthlySalary, cont
  * @param {number} priceToday - Today's stock price (optional)
  * @returns {object} Profit calculation results
  */
-function calculateProfit(numberOfShares, priceB, totalContribution, priceToday) {
+function calculateProfit(
+  numberOfShares,
+  priceB,
+  totalContribution,
+  priceToday
+) {
   const marketValue = numberOfShares * priceB;
   const profit = marketValue - totalContribution;
-  
+
   let marketValueToday = null;
   let profitToday = null;
-  
+
   if (validateNumericInput(priceToday)) {
     marketValueToday = numberOfShares * priceToday;
     profitToday = marketValueToday - totalContribution;
   }
-  
+
   return { marketValue, profit, marketValueToday, profitToday };
+}
+
+/**
+ * Calculate taxable benefit and actual tax
+ * @param {number} numberOfShares - Number of shares
+ * @param {number} priceB - Ending period stock price
+ * @param {number} purchasePrice - Purchase price with 15% discount
+ * @param {number} exchangeRate - NIS to USD exchange rate
+ * @returns {object} Taxable benefit and actual tax in USD
+ */
+function calculateTaxableBenefit(
+  numberOfShares,
+  priceB,
+  purchasePrice,
+  exchangeRate
+) {
+  const TAX_BRACKET = 0.31; // 31% fixed tax bracket
+
+  // Taxable benefit = (End Price - Purchase Price) × Number of Shares
+  const benefitPerShare = priceB - purchasePrice;
+  const taxableBenefitUSD = numberOfShares * benefitPerShare;
+  const actualTaxUSD = taxableBenefitUSD * TAX_BRACKET;
+
+  return { taxableBenefitUSD, actualTaxUSD };
 }
 
 // ==================== DISPLAY FUNCTIONS ====================
@@ -610,8 +724,9 @@ function calculateProfit(numberOfShares, priceB, totalContribution, priceToday) 
  */
 function displayProfitValue(element, profit, totalContribution) {
   const percentage = formatProfitPercentage(profit, totalContribution);
-  element.textContent = formatUSD(profit) + ' (' + percentage + ')';
-  element.style.color = profit >= 0 ? COLORS.PROFIT_POSITIVE : COLORS.PROFIT_NEGATIVE;
+  element.textContent = formatUSD(profit) + " (" + percentage + ")";
+  element.style.color =
+    profit >= 0 ? COLORS.PROFIT_POSITIVE : COLORS.PROFIT_NEGATIVE;
 }
 
 /**
@@ -619,8 +734,10 @@ function displayProfitValue(element, profit, totalContribution) {
  * @param {object} results - Calculation results object
  */
 function displayPriceResults(results) {
-  elements.lowerPrice.textContent = DISPLAY_TEXT.CURRENCY_USD + results.lowerPrice.toFixed(2);
-  elements.purchasePrice.textContent = DISPLAY_TEXT.CURRENCY_USD + results.purchasePrice.toFixed(2);
+  elements.lowerPrice.textContent =
+    DISPLAY_TEXT.CURRENCY_USD + results.lowerPrice.toFixed(2);
+  elements.purchasePrice.textContent =
+    DISPLAY_TEXT.CURRENCY_USD + results.purchasePrice.toFixed(2);
 }
 
 /**
@@ -629,17 +746,21 @@ function displayPriceResults(results) {
  */
 function displayContributionResults(results) {
   if (results.monthlyContribution !== null) {
-    elements.monthlyContribution.textContent = formatNIS(results.monthlyContribution);
+    elements.monthlyContribution.textContent = formatNIS(
+      results.monthlyContribution
+    );
   } else {
     elements.monthlyContribution.textContent = DISPLAY_TEXT.NOT_AVAILABLE;
   }
-  
+
   if (results.totalContributionNIS !== null) {
-    elements.totalContributionNIS.textContent = formatNIS(results.totalContributionNIS);
+    elements.totalContributionNIS.textContent = formatNIS(
+      results.totalContributionNIS
+    );
   } else {
     elements.totalContributionNIS.textContent = DISPLAY_TEXT.NOT_AVAILABLE;
   }
-  
+
   elements.totalContribution.textContent = formatUSD(results.totalContribution);
 }
 
@@ -649,8 +770,9 @@ function displayContributionResults(results) {
  * @param {boolean} useActualShares - Whether actual shares mode is enabled
  */
 function displayShareResults(results, useActualShares) {
-  const sharesSuffix = useActualShares ? DISPLAY_TEXT.ACTUAL_SUFFIX : '';
-  elements.shares.textContent = results.numberOfShares.toFixed(4)  + sharesSuffix;
+  const sharesSuffix = useActualShares ? DISPLAY_TEXT.ACTUAL_SUFFIX : "";
+  elements.shares.textContent =
+    results.numberOfShares.toFixed(4) + sharesSuffix;
   elements.marketValue.textContent = formatUSD(results.marketValue);
 }
 
@@ -659,18 +781,35 @@ function displayShareResults(results, useActualShares) {
  * @param {object} results - Calculation results object
  */
 function displayProfitResults(results) {
-  displayProfitValue(elements.profit, results.profit, results.totalContribution);
-  
+  displayProfitValue(
+    elements.profit,
+    results.profit,
+    results.totalContribution
+  );
+
   // Handle today's value if provided
   if (results.marketValueToday !== null) {
     elements.marketValueToday.textContent = formatUSD(results.marketValueToday);
-    displayProfitValue(elements.profitToday, results.profitToday, results.totalContribution);
+    displayProfitValue(
+      elements.profitToday,
+      results.profitToday,
+      results.totalContribution
+    );
     showElement(elements.todayValueRow);
     showElement(elements.todayProfitRow);
   } else {
     hideElement(elements.todayValueRow);
     hideElement(elements.todayProfitRow);
   }
+}
+
+/**
+ * Display taxable benefit results
+ * @param {object} results - Calculation results object
+ */
+function displayTaxableBenefitResults(results) {
+  elements.taxableBenefitUSD.textContent = formatUSD(results.taxableBenefitUSD);
+  elements.actualTaxUSD.textContent = formatUSD(results.actualTaxUSD);
 }
 
 /**
@@ -697,6 +836,7 @@ function displayResults(results, useActualShares) {
   displayContributionResults(results);
   displayShareResults(results, useActualShares);
   displayProfitResults(results);
+  displayTaxableBenefitResults(results);
   toggleContributionRows(useActualShares);
 }
 
@@ -707,26 +847,45 @@ function displayResults(results, useActualShares) {
  */
 function calculate() {
   const inputs = getInputValues();
-  
+
   if (!validateInputs(inputs.useActualShares)) {
     return;
   }
-  
-  const { lowerPrice, purchasePrice } = calculatePurchasePrice(inputs.priceA, inputs.priceB);
-  
-  const { numberOfShares, totalContribution, monthlyContribution, totalContributionNIS } = 
-    calculateShares(
-      inputs.useActualShares, 
-      inputs.actualSharesValue, 
-      inputs.monthlySalary, 
-      inputs.contributionPercent, 
-      inputs.exchangeRate, 
-      purchasePrice
+
+  const { lowerPrice, purchasePrice } = calculatePurchasePrice(
+    inputs.priceA,
+    inputs.priceB
+  );
+
+  const {
+    numberOfShares,
+    totalContribution,
+    monthlyContribution,
+    totalContributionNIS,
+  } = calculateShares(
+    inputs.useActualShares,
+    inputs.actualSharesValue,
+    inputs.monthlySalary,
+    inputs.contributionPercent,
+    inputs.exchangeRate,
+    purchasePrice
+  );
+
+  const { marketValue, profit, marketValueToday, profitToday } =
+    calculateProfit(
+      numberOfShares,
+      inputs.priceB,
+      totalContribution,
+      inputs.priceToday
     );
-  
-  const { marketValue, profit, marketValueToday, profitToday } = 
-    calculateProfit(numberOfShares, inputs.priceB, totalContribution, inputs.priceToday);
-  
+
+  const { taxableBenefitUSD, actualTaxUSD } = calculateTaxableBenefit(
+    numberOfShares,
+    inputs.priceB,
+    purchasePrice,
+    inputs.exchangeRate
+  );
+
   const results = {
     lowerPrice,
     purchasePrice,
@@ -737,9 +896,11 @@ function calculate() {
     marketValue,
     profit,
     marketValueToday,
-    profitToday
+    profitToday,
+    taxableBenefitUSD,
+    actualTaxUSD,
   };
-  
+
   displayResults(results, inputs.useActualShares);
 }
 
@@ -749,14 +910,14 @@ function calculate() {
  * Toggle tax information section
  */
 function toggleTaxInfo() {
-  toggleCollapsible('taxContent', 'taxArrow');
+  toggleCollapsible("taxContent", "taxArrow");
 }
 
 /**
  * Toggle fees information section
  */
 function toggleFeesInfo() {
-  toggleCollapsible('feesContent', 'feesArrow');
+  toggleCollapsible("feesContent", "feesArrow");
 }
 
 // ==================== EVENT LISTENERS ====================
@@ -766,24 +927,27 @@ function toggleFeesInfo() {
  */
 function initEventListeners() {
   // Period selection
-  elements.periodRadios.forEach(radio => {
-    radio.addEventListener('change', handlePeriodChange);
+  elements.periodRadios.forEach((radio) => {
+    radio.addEventListener("change", handlePeriodChange);
   });
-  
+
   // Custom select
-  elements.selectTrigger.addEventListener('click', handleCustomSelectClick);
-  elements.selectOptions.forEach(option => {
-    option.addEventListener('click', () => handleOptionClick(option));
+  elements.selectTrigger.addEventListener("click", handleCustomSelectClick);
+  elements.selectOptions.forEach((option) => {
+    option.addEventListener("click", () => handleOptionClick(option));
   });
-  document.addEventListener('click', handleDocumentClick);
-  
+  document.addEventListener("click", handleDocumentClick);
+
   // Actual shares toggle
-  elements.useActualSharesCheckbox.addEventListener('change', handleActualSharesToggle);
-  
+  elements.useActualSharesCheckbox.addEventListener(
+    "change",
+    handleActualSharesToggle
+  );
+
   // Input validation and enter key
-  document.querySelectorAll('input').forEach(input => {
-    input.addEventListener('keypress', handleEnterKey);
-    input.addEventListener('input', handleInputChange);
+  document.querySelectorAll("input").forEach((input) => {
+    input.addEventListener("keypress", handleEnterKey);
+    input.addEventListener("input", handleInputChange);
   });
 }
 
@@ -794,12 +958,24 @@ function initEventListeners() {
  * @param {string} lang - Language code
  */
 function updateOfferingPeriodsConfig(lang) {
-  if (lang === 'he') {
-    OFFERING_PERIODS['oct-mar'] = { startDate: '1 באוקטובר', endDate: '31 במרץ' };
-    OFFERING_PERIODS['apr-sep'] = { startDate: '1 באפריל', endDate: '30 בספטמבר' };
+  if (lang === "he") {
+    OFFERING_PERIODS["oct-mar"] = {
+      startDate: "1 באוקטובר",
+      endDate: "31 במרץ",
+    };
+    OFFERING_PERIODS["apr-sep"] = {
+      startDate: "1 באפריל",
+      endDate: "30 בספטמבר",
+    };
   } else {
-    OFFERING_PERIODS['oct-mar'] = { startDate: 'October 1', endDate: 'March 31' };
-    OFFERING_PERIODS['apr-sep'] = { startDate: 'April 1', endDate: 'September 30' };
+    OFFERING_PERIODS["oct-mar"] = {
+      startDate: "October 1",
+      endDate: "March 31",
+    };
+    OFFERING_PERIODS["apr-sep"] = {
+      startDate: "April 1",
+      endDate: "September 30",
+    };
   }
 }
 
@@ -812,10 +988,10 @@ function updateOfferingPeriodsConfig(lang) {
 function updatePriceLabels(lang, t, config) {
   const [startLabel, endLabel] = [
     document.querySelectorAll('label[for="priceA"]')[0],
-    document.querySelectorAll('label[for="priceB"]')[0]
+    document.querySelectorAll('label[for="priceB"]')[0],
   ];
-  
-  if (lang === 'he') {
+
+  if (lang === "he") {
     if (startLabel) startLabel.innerHTML = t.startPriceLabel + config.startDate;
     if (endLabel) endLabel.innerHTML = t.endPriceLabel + config.endDate;
   } else {
@@ -825,8 +1001,8 @@ function updatePriceLabels(lang, t, config) {
     if (endLabel) {
       endLabel.innerHTML = `<span id="endDateLabel">${config.endDate}</span> ${t.endPriceLabel}`;
     }
-    elements.startDateLabel = document.getElementById('startDateLabel');
-    elements.endDateLabel = document.getElementById('endDateLabel');
+    elements.startDateLabel = document.getElementById("startDateLabel");
+    elements.endDateLabel = document.getElementById("endDateLabel");
   }
 }
 
@@ -835,8 +1011,10 @@ function updatePriceLabels(lang, t, config) {
  * @param {object} config - Current period configuration
  */
 function updateResultDates(config) {
-  if (elements.endDateResult) elements.endDateResult.textContent = config.endDate;
-  if (elements.endDateProfit) elements.endDateProfit.textContent = config.endDate;
+  if (elements.endDateResult)
+    elements.endDateResult.textContent = config.endDate;
+  if (elements.endDateProfit)
+    elements.endDateProfit.textContent = config.endDate;
   if (elements.endDateTax) elements.endDateTax.textContent = config.endDate;
 }
 
@@ -846,20 +1024,22 @@ function updateResultDates(config) {
  */
 function updateBasicLabels(t) {
   const labelMap = [
-    { selector: 'label[for="offeringPeriod"]', key: 'selectPeriod' },
-    { selector: 'label[for="priceToday"]', key: 'todayPriceLabel' },
-    { selector: 'label[for="actualShares"]', key: 'actualSharesLabel' },
-    { selector: 'label[for="contribution"]', key: 'contributionLabel' },
-    { selector: 'label[for="salary"]', key: 'salaryLabel' },
-    { selector: 'label[for="exchangeRate"]', key: 'exchangeRateLabel' }
+    { selector: 'label[for="offeringPeriod"]', key: "selectPeriod" },
+    { selector: 'label[for="priceToday"]', key: "todayPriceLabel" },
+    { selector: 'label[for="actualShares"]', key: "actualSharesLabel" },
+    { selector: 'label[for="contribution"]', key: "contributionLabel" },
+    { selector: 'label[for="salary"]', key: "salaryLabel" },
+    { selector: 'label[for="exchangeRate"]', key: "exchangeRateLabel" },
   ];
-  
+
   labelMap.forEach(({ selector, key }) => {
     const label = document.querySelector(selector);
     if (label) {
-      const textNode = Array.from(label.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+      const textNode = Array.from(label.childNodes).find(
+        (node) => node.nodeType === Node.TEXT_NODE
+      );
       if (textNode) {
-        textNode.textContent = ' ' + t[key];
+        textNode.textContent = " " + t[key];
       } else {
         label.childNodes[0].textContent = t[key];
       }
@@ -873,11 +1053,17 @@ function updateBasicLabels(t) {
  */
 function updateTooltips(t) {
   const tooltipKeys = [
-    'periodTooltip', 'startPriceTooltip', 'endPriceTooltip', 'todayPriceTooltip',
-    'actualSharesTooltip', 'contributionTooltip', 'salaryTooltip', 'exchangeRateTooltip'
+    "periodTooltip",
+    "startPriceTooltip",
+    "endPriceTooltip",
+    "todayPriceTooltip",
+    "actualSharesTooltip",
+    "contributionTooltip",
+    "salaryTooltip",
+    "exchangeRateTooltip",
   ];
-  
-  document.querySelectorAll('.tooltip-text').forEach((tooltip, index) => {
+
+  document.querySelectorAll(".tooltip-text").forEach((tooltip, index) => {
     if (tooltipKeys[index]) tooltip.textContent = t[tooltipKeys[index]];
   });
 }
@@ -887,7 +1073,7 @@ function updateTooltips(t) {
  * @param {object} t - Translations object
  */
 function updateRadioLabels(t) {
-  document.querySelectorAll('.radio-label').forEach((label, index) => {
+  document.querySelectorAll(".radio-label").forEach((label, index) => {
     label.textContent = index === 0 ? t.periodOctMar : t.periodAprSep;
   });
 }
@@ -897,11 +1083,13 @@ function updateRadioLabels(t) {
  * @param {object} t - Translations object
  */
 function updateToggleLabel(t) {
-  const toggleLabel = document.querySelector('.toggle-label');
+  const toggleLabel = document.querySelector(".toggle-label");
   if (toggleLabel) {
-    const textNodes = Array.from(toggleLabel.childNodes).filter(node => node.nodeType === Node.TEXT_NODE);
+    const textNodes = Array.from(toggleLabel.childNodes).filter(
+      (node) => node.nodeType === Node.TEXT_NODE
+    );
     if (textNodes.length > 0) {
-      textNodes[textNodes.length - 1].textContent = ' ' + t.actualSharesToggle;
+      textNodes[textNodes.length - 1].textContent = " " + t.actualSharesToggle;
     }
   }
 }
@@ -911,27 +1099,68 @@ function updateToggleLabel(t) {
  * @param {object} t - Translations object
  */
 function updateResultsLabels(t) {
-  document.querySelector('.results-header').textContent = t.resultsHeader;
-  
-  const resultLabels = document.querySelectorAll('.result-item .result-label');
-  resultLabels.forEach(label => {
+  document.querySelector(".results-header").textContent = t.resultsHeader;
+
+  const resultLabels = document.querySelectorAll(".result-item .result-label");
+  resultLabels.forEach((label) => {
     const text = label.textContent;
-    if (text.includes('Lower Stock Price') || text.includes('מחיר המניה הנמוך')) {
+    if (
+      text.includes("Lower Stock Price") ||
+      text.includes("מחיר המניה הנמוך")
+    ) {
       label.textContent = t.lowerStockPrice;
-    } else if (text.includes('Purchase Price - 15%') || text.includes('מחיר רכישה - 15%')) {
+    } else if (
+      text.includes("Purchase Price - 15%") ||
+      text.includes("מחיר רכישה - 15%")
+    ) {
       label.textContent = t.purchasePriceDiscount;
-    } else if (text.includes('Total ESPP Contributions (6 months) - USD') || text.includes('סה"כ הפרשות ESPP (6 חודשים) - דולר')) {
+    } else if (
+      text.includes("Total ESPP Contributions (6 months) - USD") ||
+      text.includes('סה"כ הפרשות ESPP (6 חודשים) - דולר')
+    ) {
       label.textContent = t.totalContributionUSD;
     }
   });
-  
-  document.querySelector('#monthlyContributionRow .result-label').textContent = t.monthlyContribution;
-  document.querySelector('#totalContributionNISRow .result-label').textContent = t.totalContributionNIS;
-  
-  const sharesLabel = Array.from(document.querySelectorAll('.result-label')).find(el => 
-    el.textContent.includes('Number of Shares') || el.textContent.includes('מספר המניות')
+
+  document.querySelector("#monthlyContributionRow .result-label").textContent =
+    t.monthlyContribution;
+  document.querySelector("#totalContributionNISRow .result-label").textContent =
+    t.totalContributionNIS;
+
+  const sharesLabel = Array.from(
+    document.querySelectorAll(".result-label")
+  ).find(
+    (el) =>
+      el.textContent.includes("Number of Shares") ||
+      el.textContent.includes("מספר המניות")
   );
   if (sharesLabel) sharesLabel.textContent = t.sharesLabel;
+
+  // Update tax info labels
+  const taxInfoHeader = document.querySelector(".tax-info-header");
+  if (taxInfoHeader) taxInfoHeader.textContent = t.taxInfoHeader;
+
+  const taxableBenefitUSDLabel = Array.from(
+    document.querySelectorAll(".result-label")
+  ).find(
+    (el) =>
+      el.textContent.includes("Taxable Benefit (USD)") ||
+      el.textContent.includes("הטבה חייבת במס (דולר)")
+  );
+  if (taxableBenefitUSDLabel)
+    taxableBenefitUSDLabel.textContent = t.taxableBenefitUSD;
+
+  const actualTaxUSDLabel = Array.from(
+    document.querySelectorAll(".result-label")
+  ).find(
+    (el) =>
+      el.textContent.includes("Actual Tax Taken") ||
+      el.textContent.includes("מס בפועל")
+  );
+  if (actualTaxUSDLabel) actualTaxUSDLabel.textContent = t.actualTaxUSD;
+
+  const taxInfoNote = document.querySelector(".tax-info-note");
+  if (taxInfoNote) taxInfoNote.textContent = t.taxInfoNote;
 }
 
 /**
@@ -939,22 +1168,22 @@ function updateResultsLabels(t) {
  * @param {object} t - Translations object
  */
 function updateChartLabels(t) {
-  const chartTitle = document.querySelector('.chart-title');
+  const chartTitle = document.querySelector(".chart-title");
   if (chartTitle) chartTitle.textContent = t.chartTitle;
-  
-  const chartTitles = document.querySelectorAll('.chart-card-title');
+
+  const chartTitles = document.querySelectorAll(".chart-card-title");
   if (chartTitles[0]) chartTitles[0].textContent = t.priceComparisonTitle;
   if (chartTitles[1]) chartTitles[1].textContent = t.profitBreakdownTitle;
-  
-  const priceBarLabels = document.querySelectorAll('.price-bar-label');
+
+  const priceBarLabels = document.querySelectorAll(".price-bar-label");
   if (priceBarLabels[0]) priceBarLabels[0].textContent = t.startPriceBar;
   if (priceBarLabels[1]) priceBarLabels[1].textContent = t.endPriceBar;
   if (priceBarLabels[2]) priceBarLabels[2].textContent = t.purchasePriceBar;
-  
-  const summaryLabel = document.querySelector('.summary-label');
+
+  const summaryLabel = document.querySelector(".summary-label");
   if (summaryLabel) summaryLabel.textContent = t.totalContributionUSD;
-  
-  const segmentLabels = document.querySelectorAll('.segment-label');
+
+  const segmentLabels = document.querySelectorAll(".segment-label");
   if (segmentLabels[0]) segmentLabels[0].textContent = t.contributionSegment;
   if (segmentLabels[1]) segmentLabels[1].textContent = t.profitSegment;
 }
@@ -965,30 +1194,39 @@ function updateChartLabels(t) {
  * @param {object} t - Translations object
  */
 function updateHighlightLabels(lang, t) {
-  const highlightItems = document.querySelectorAll('.highlight .result-item');
-  
+  const highlightItems = document.querySelectorAll(".highlight .result-item");
+
   highlightItems.forEach((item) => {
-    const label = item.querySelector('.result-label');
+    const label = item.querySelector(".result-label");
     if (!label) return;
-    
+
     const labelText = label.textContent;
-    const separator = lang === 'he' ? '' : ' ';
-    
-    if (labelText.includes('Value at') || labelText.includes('ערכן ב')) {
-      const dateSpan = label.querySelector('span');
+    const separator = lang === "he" ? "" : " ";
+
+    if (labelText.includes("Value at") || labelText.includes("ערכן ב")) {
+      const dateSpan = label.querySelector("span");
       if (dateSpan) {
         const dateText = translateDate(dateSpan.textContent, lang);
         label.innerHTML = `${t.valueAtDate}${separator}<span id="endDateResult">${dateText}</span>`;
       }
-    } else if ((labelText.includes('Value Today') || labelText.includes('ערכן היום')) && !labelText.includes('Profit')) {
+    } else if (
+      (labelText.includes("Value Today") || labelText.includes("ערכן היום")) &&
+      !labelText.includes("Profit")
+    ) {
       label.textContent = t.valueTodayLabel;
-    } else if (labelText.includes('Instant Profit') || labelText.includes('הרווח המיידי')) {
-      const dateSpan = label.querySelector('span');
+    } else if (
+      labelText.includes("Instant Profit") ||
+      labelText.includes("הרווח המיידי")
+    ) {
+      const dateSpan = label.querySelector("span");
       if (dateSpan) {
         const dateText = translateDate(dateSpan.textContent, lang);
         label.innerHTML = `${t.profitAtDate}${separator}<span id="endDateProfit">${dateText}</span> ${t.profitValueMinus}`;
       }
-    } else if (labelText.includes('Total Profit Today') || labelText.includes('הרווח הכולל')) {
+    } else if (
+      labelText.includes("Total Profit Today") ||
+      labelText.includes("הרווח הכולל")
+    ) {
       label.textContent = t.profitTodayLabel;
     }
   });
@@ -1000,13 +1238,19 @@ function updateHighlightLabels(lang, t) {
  * @param {object} t - Translations object
  */
 function updateCollapsibleSections(lang, t) {
-  const feesTitleElem = document.querySelector('[onclick="toggleFeesInfo()"] strong');
+  const feesTitleElem = document.querySelector(
+    '[onclick="toggleFeesInfo()"] strong'
+  );
   if (feesTitleElem) feesTitleElem.textContent = t.feesTitle;
-  
-  const taxTitleElem = document.querySelector('[onclick="toggleTaxInfo()"] strong');
+
+  const taxTitleElem = document.querySelector(
+    '[onclick="toggleTaxInfo()"] strong'
+  );
   if (taxTitleElem) taxTitleElem.textContent = t.taxTitle;
-  
-  const feesContent = document.querySelector('#feesContent .collapsible-content-inner');
+
+  const feesContent = document.querySelector(
+    "#feesContent .collapsible-content-inner"
+  );
   if (feesContent) {
     feesContent.innerHTML = `
       <strong style="color: #2c5282">${t.feesPurchase}</strong>
@@ -1015,10 +1259,16 @@ function updateCollapsibleSections(lang, t) {
       ${t.feesSellingText}
     `;
   }
-  
-  const taxContent = document.querySelector('#taxContent .collapsible-content-inner');
+
+  const taxContent = document.querySelector(
+    "#taxContent .collapsible-content-inner"
+  );
   if (taxContent) {
-    const endDate = elements.endDateTax ? elements.endDateTax.textContent : (lang === 'he' ? '31 במרץ' : 'March 31');
+    const endDate = elements.endDateTax
+      ? elements.endDateTax.textContent
+      : lang === "he"
+      ? "31 במרץ"
+      : "March 31";
     taxContent.innerHTML = `
       <strong>${t.taxImportant}</strong>
       ${t.taxImportantText}
@@ -1039,18 +1289,18 @@ function updateCollapsibleSections(lang, t) {
  * @returns {string} Translated date
  */
 function translateDate(dateText, lang) {
-  if (lang === 'he') {
+  if (lang === "he") {
     // English to Hebrew
-    if (dateText.includes('October 1')) return '1 באוקטובר';
-    if (dateText.includes('March 31')) return '31 במרץ';
-    if (dateText.includes('April 1')) return '1 באפריל';
-    if (dateText.includes('September 30')) return '30 בספטמבר';
+    if (dateText.includes("October 1")) return "1 באוקטובר";
+    if (dateText.includes("March 31")) return "31 במרץ";
+    if (dateText.includes("April 1")) return "1 באפריל";
+    if (dateText.includes("September 30")) return "30 בספטמבר";
   } else {
     // Hebrew to English
-    if (dateText.includes('1 באוקטובר')) return 'October 1';
-    if (dateText.includes('31 במרץ')) return 'March 31';
-    if (dateText.includes('1 באפריל')) return 'April 1';
-    if (dateText.includes('30 בספטמבר')) return 'September 30';
+    if (dateText.includes("1 באוקטובר")) return "October 1";
+    if (dateText.includes("31 במרץ")) return "March 31";
+    if (dateText.includes("1 באפריל")) return "April 1";
+    if (dateText.includes("30 בספטמבר")) return "September 30";
   }
   return dateText;
 }
@@ -1061,38 +1311,41 @@ function translateDate(dateText, lang) {
  */
 function changeLanguage(lang) {
   currentLang = lang;
-  
+
   // Set RTL/LTR direction
-  document.documentElement.setAttribute('dir', lang === 'he' ? 'rtl' : 'ltr');
-  document.body.style.textAlign = lang === 'he' ? 'right' : 'left';
-  
+  document.documentElement.setAttribute("dir", lang === "he" ? "rtl" : "ltr");
+  document.body.style.textAlign = lang === "he" ? "right" : "left";
+
   const t = translations[lang];
-  const selectedPeriod = document.querySelector('input[name="offeringPeriod"]:checked').value;
-  
+  const selectedPeriod = document.querySelector(
+    'input[name="offeringPeriod"]:checked'
+  ).value;
+
   // Update title
-  document.querySelector('h1').textContent = t.title;
-  
+  document.querySelector("h1").textContent = t.title;
+
   // Update configurations and dates
   updateOfferingPeriodsConfig(lang);
   const currentPeriodConfig = OFFERING_PERIODS[selectedPeriod];
   updatePriceLabels(lang, t, currentPeriodConfig);
   updateResultDates(currentPeriodConfig);
-  
+
   // Update form elements
   updateBasicLabels(t);
   updateTooltips(t);
   updateRadioLabels(t);
   updateToggleLabel(t);
-  
+
   // Update placeholders and buttons
   elements.selectedValueSpan.textContent = t.contributionPlaceholder;
-  document.querySelector('button[onclick="calculate()"]').textContent = t.calculateButton;
-  
+  document.querySelector('button[onclick="calculate()"]').textContent =
+    t.calculateButton;
+
   // Update results and charts
   updateResultsLabels(t);
   updateChartLabels(t);
   updateHighlightLabels(lang, t);
-  
+
   // Update collapsible sections
   updateCollapsibleSections(lang, t);
 }
@@ -1100,7 +1353,7 @@ function changeLanguage(lang) {
 /**
  * Initialize the application when DOM is ready
  */
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
   initializeElements();
   initEventListeners();
 });

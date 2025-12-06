@@ -4,43 +4,49 @@
   --color-primary: #3182ce;
   --color-primary-dark: #2c5282;
   --color-primary-light: #4299e1;
-  
+
   /* Colors - Text */
   --color-text-primary: #2d3748;
   --color-text-secondary: #718096;
   --color-text-label: #4a5568;
   --color-text-dark: #1a202c;
-  
+
   /* Colors - Background */
   --color-bg-main: #f5f7fa;
   --color-bg-white: white;
   --color-bg-hover: #f7fafc;
   --color-bg-selected: #ebf8ff;
-  
+
   /* Colors - Border */
   --color-border: #e2e8f0;
   --color-border-light: #f7fafc;
   --color-border-hover: #cbd5e0;
-  
+
   /* Colors - State */
   --color-error: #f56565;
   --color-success: #48bb78;
   --color-placeholder: #a0aec0;
-  
+
   /* Colors - Toggle */
   --color-toggle-bg: #cbd5e0;
   --color-toggle-hover: #a0aec0;
-  
+
   /* Colors - Collapsible */
   --color-collapsible-bg: #fffaf0;
   --color-collapsible-hover: #fef5e7;
   --color-collapsible-border: #ed8936;
   --color-collapsible-text: #744210;
   --color-collapsible-strong: #7c2d12;
-  
+
+  /* Colors - Tax Info */
+  --color-tax-bg: #fef3c7;
+  --color-tax-border: #f59e0b;
+  --color-tax-text: #78350f;
+  --color-tax-header: #92400e;
+
   /* Colors - Tooltip */
   --color-tooltip-bg: #2d3748;
-  
+
   /* Spacing */
   --spacing-xs: 8px;
   --spacing-sm: 12px;
@@ -49,7 +55,7 @@
   --spacing-xl: 24px;
   --spacing-2xl: 30px;
   --spacing-3xl: 40px;
-  
+
   /* Border Radius */
   --radius-sm: 6px;
   --radius-md: 8px;
@@ -57,26 +63,27 @@
   --radius-xl: 12px;
   --radius-full: 50%;
   --radius-pill: 24px;
-  
+
   /* Shadows */
   --shadow-sm: 0 2px 4px rgba(49, 130, 206, 0.2);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 10px 25px rgba(0, 0, 0, 0.05);
   --shadow-lg: 0 4px 8px rgba(49, 130, 206, 0.3);
   --shadow-highlight: 0 4px 15px rgba(102, 126, 234, 0.3);
   --shadow-tooltip: 0 4px 12px rgba(0, 0, 0, 0.15);
-  
+
   /* Focus Ring */
   --focus-ring-primary: 0 0 0 3px rgba(66, 153, 225, 0.1);
   --focus-ring-error: 0 0 0 3px rgba(245, 101, 101, 0.1);
-  
+
   /* Transitions */
   --transition-fast: 0.15s;
   --transition-normal: 0.2s;
   --transition-slow: 0.3s;
   --transition-collapse: 0.5s;
-  
+
   /* Typography */
-  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
   --font-size-xs: 11px;
   --font-size-sm: 12px;
   --font-size-base: 13px;
@@ -585,6 +592,49 @@ button:active {
 
 .highlight .result-label {
   opacity: 0.9;
+}
+
+/* Tax Info Box */
+.tax-info-box {
+  background: var(--color-tax-bg);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  margin-top: var(--spacing-lg);
+  border-left: 4px solid var(--color-tax-border);
+}
+
+.tax-info-header {
+  color: var(--color-tax-header);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 2px solid rgba(245, 158, 11, 0.3);
+}
+
+.tax-info-box .result-item {
+  border-bottom-color: rgba(245, 158, 11, 0.2);
+  padding: var(--spacing-sm) 0;
+}
+
+.tax-info-box .result-label,
+.tax-info-box .result-value {
+  color: var(--color-tax-text);
+}
+
+.tax-info-box .result-item:last-child {
+  border-bottom: none;
+}
+
+.tax-info-note {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-sm);
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-md);
+  color: var(--color-tax-text);
+  line-height: 1.5;
+  font-style: italic;
 }
 
 /* ==================== COLLAPSIBLE SECTIONS ==================== */
